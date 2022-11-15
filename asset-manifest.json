@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/unifi/static/css/main.073c9b0a.css",
-    "main.js": "/unifi/static/js/main.261544ff.js",
+    "main.js": "/unifi/static/js/main.1e6c1d7c.js",
     "static/js/787.290d0e0a.chunk.js": "/unifi/static/js/787.290d0e0a.chunk.js",
     "static/media/logo.svg": "/unifi/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/unifi/index.html",
     "main.073c9b0a.css.map": "/unifi/static/css/main.073c9b0a.css.map",
-    "main.261544ff.js.map": "/unifi/static/js/main.261544ff.js.map",
+    "main.1e6c1d7c.js.map": "/unifi/static/js/main.1e6c1d7c.js.map",
     "787.290d0e0a.chunk.js.map": "/unifi/static/js/787.290d0e0a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.261544ff.js"
+    "static/js/main.1e6c1d7c.js"
   ]
 }
