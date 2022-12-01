@@ -6,13 +6,13 @@ function DosCommandList(props) {
     const task = props.task;
 
     useEffect(() => {
-        console.log("Populating dos commands");
-    }, [])
+        console.log("Populating dos commands: ", task.name);
+    }, [task])
 
     return (
         <Box sx={{
             m: 2,
-            width: 200,
+            width: 250,
             borderRadius: 1,
             bgcolor: 'white',
             border: '1px solid grey'
