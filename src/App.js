@@ -6,23 +6,30 @@ import DosCommandList from './components/DosCommandList';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function App() {
-  const [weather, setWeather] = useState([
-    { date: '', temperatureC: 0, temperatureF: 0, summary: "" }
-  ])
+  const [task, setTask] = useState({
+    "name": "test",
+    "commandGroup": 1,
+    "commands": [
+      { "displayText": "text" }
+    ]
+  })
 
   useEffect(() => {
-    fetch('http://localhost:5000/WeatherForecast')
+    fetch('http://localhost:5000/Api/Commands')
       .then(response => response.json())
-      .then(data => setWeather(data))
+      .then(data => setTask(data.find(t => t.commandGroup === 1 && t.name==="Service")))
   }, [])
 
+  // const a = task.find(t => t.commandGroup === 1 && t.name==="Service");
+  // console.log(a);
   const theme = createTheme()
 
   return (
     <div className="App">
       {/* <CommandsContextProvider> */}
       <ThemeProvider theme={theme}>
-        <DosCommandList commands={[{ Name: "Check service status" }, {Name: "Download installer"}]} />
+        {/* <DosCommandList commands={[{ Name: "Check service status" }, {Name: "Download installer"}]} /> */}
+        <DosCommandList task={task} />
         {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>

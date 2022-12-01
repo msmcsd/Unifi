@@ -3,7 +3,7 @@ import { Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/mate
 import { Box } from '@mui/system';
 
 function DosCommandList(props) {
-    const commands = props.commands;
+    const task = props.task;
 
     useEffect(() => {
         console.log("Populating dos commands");
@@ -16,13 +16,13 @@ function DosCommandList(props) {
             borderRadius: 1,
             bgcolor: 'white',
             border: '1px solid grey'
-        }}>Check service
+        }}>{ task.name }
             <Divider/>
             <List disablePadding dense={true}>
-                {commands.map(c =>
-                    <ListItem disablePadding key={c.Name} >
-                        <ListItemButton sx={{height:20}} onClick={() => console.log(c.Name)}>
-                            <ListItemText primary={c.Name} />
+                {task.commands.map(c =>
+                    <ListItem disablePadding key={c.displayText} >
+                        <ListItemButton sx={{height:20}} onClick={() => console.log(c.displayText)}>
+                            <ListItemText primary={c.displayText} />
                         </ListItemButton>
                     </ListItem>
                 )}
