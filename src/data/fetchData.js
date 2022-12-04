@@ -1,4 +1,7 @@
 import URL from '../constants/Url';
+import { io } from 'socket.io-client';
+import PORT from '../constants/Port';
+import SocketEvent from '../constants/SocketEvent';
 
 export const fetchAllTasks = async () => {
     try {
@@ -20,6 +23,44 @@ export const fetchAllTasks = async () => {
     }
 }
 
-export const runCommand = async (parameters = []) => {
+const socketLoggingEvents = [
+    SocketEvent.Info,
+    SocketEvent.Error,
+    SocketEvent.Parameters,
+    SocketEvent.Progress
+]
+
+const allSocketEvents = [
+    ...socketLoggingEvents,
+    SocketEvent.Connect,
+    SocketEvent.Disconnect,
+    SocketEvent.ConnectError
+]
+
+export const runCommand = async (taskName, displayText) => {
+    // console.log(taskName, displayText);
+    const url = URL.COMMAND + "?taskName=" + taskName + "&displayText=" + encodeURIComponent(displayText);
+    // console.log(url);
+
+    const socket = io(URL.SOCKET);
+    socket.on(SocketEvent.Connect, () => console.log("Connected to socket server", socket.id));
+    socket.on(SocketEvent.ConnectError, ()=>{
+      setTimeout(() => socket.connect(), PORT.SOCKET)
+    })
+    socket.on(SocketEvent.Disconnect, () => console.log("Server disconnected"));
     
+    socketLoggingEvents.forEach(e => socket.on(e, (data) => LogStatus(e, data)))
+    
+
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data.result);
+
+    // Unregister events
+    allSocketEvents.forEach(e => socket.off(e));
+    socket.disconnect();
+}
+
+function LogStatus(socketEvent, message) {
+    console.log(socketEvent, message);
 }

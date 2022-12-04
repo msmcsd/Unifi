@@ -1,12 +1,13 @@
 import { useEffect} from 'react';
 import { Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
+import { runCommand } from '../data/fetchData';
 
 function DosCommandList(props) {
     const task = props.task;
 
     useEffect(() => {
-        console.log("Populating dos commands: ", task.name);
+        // console.log("Populating dos commands: ", task.name);
     }, [task])
 
     return (
@@ -21,7 +22,7 @@ function DosCommandList(props) {
             <List disablePadding dense={true}>
                 {task.commands.map(c =>
                     <ListItem disablePadding key={c.displayText} >
-                        <ListItemButton sx={{height:20}} onClick={() => console.log(c.displayText)}>
+                        <ListItemButton sx={{height:20}} onClick={() => runCommand(task.name, c.displayText)}>
                             <ListItemText primary={c.displayText} />
                         </ListItemButton>
                     </ListItem>
