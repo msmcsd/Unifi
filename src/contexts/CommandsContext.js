@@ -1,13 +1,15 @@
-import React, { createContext } from 'react';
+import React, { createContext, useReducer } from 'react';
+import { restReducer } from '../reducers/restReducer';
 
-export const CommansContext = createContext();
+export const CommandsContext = createContext();
 
-function CommandsContextProvider() {
+const CommandsContextProvider = (props) => {
+    const [logs, dispatch] = useReducer(restReducer, [])
     
     return (
-        <CommansContext.Provider>
-            {this.props.children}
-        </CommansContext.Provider>
+        <CommandsContext.Provider value={{logs, dispatch}}>
+            {props.children}
+        </CommandsContext.Provider>
     )
 }
 

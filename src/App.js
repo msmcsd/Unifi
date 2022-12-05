@@ -33,8 +33,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* <CommandsContextProvider> */}
-      {/* <ThemeProvider theme={theme}> */}
+      <CommandsContextProvider>
+      <ThemeProvider theme={theme}>
         <Grid // Main grid that covers the whole client area. There are 3 columnds.
           container
           direction="row"
@@ -65,8 +65,8 @@ function App() {
           </Grid>
         </Grid>
 
-        {/* </ThemeProvider> */}
-      {/* </CommandsContextProvider> */}
+        </ThemeProvider>
+      </CommandsContextProvider>
     </div>
   )
 }

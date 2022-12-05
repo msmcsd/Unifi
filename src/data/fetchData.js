@@ -2,6 +2,8 @@ import URL from '../constants/Url';
 import { io } from 'socket.io-client';
 import PORT from '../constants/Port';
 import SocketEvent from '../constants/SocketEvent';
+import ReducerAction from '../constants/ReducerAction';
+import { v4 as uuid } from "uuid";
 
 export const fetchAllTasks = async () => {
     try {
@@ -37,7 +39,7 @@ const allSocketEvents = [
     SocketEvent.ConnectError
 ]
 
-export const runCommand = async (taskName, displayText) => {
+export const runCommand = async (taskName, displayText, dispatch) => {
     // console.log(taskName, displayText);
     const url = URL.COMMAND + "?taskName=" + taskName + "&displayText=" + encodeURIComponent(displayText);
     // console.log(url);
@@ -49,7 +51,7 @@ export const runCommand = async (taskName, displayText) => {
     })
     socket.on(SocketEvent.Disconnect, () => console.log("Server disconnected"));
     
-    commandEvents.forEach(e => socket.on(e, (data) => LogStatus(e, data)))
+    commandEvents.forEach(e => socket.on(e, (data) => LogStatus(e, data, dispatch)))
     
 
     const response = await fetch(url);
@@ -61,6 +63,7 @@ export const runCommand = async (taskName, displayText) => {
     socket.disconnect();
 }
 
-function LogStatus(socketEvent, message) {
-    console.log(socketEvent, message);
+function LogStatus(socketEvent, message, dispatch) {
+    // console.log(socketEvent, message);
+    dispatch({ type: ReducerAction.AddLog, payload: { id: uuid(), type: socketEvent, log: message } });
 }
