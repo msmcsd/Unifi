@@ -23,7 +23,7 @@ export const fetchAllTasks = async () => {
     }
 }
 
-const socketLoggingEvents = [
+const commandEvents = [
     SocketEvent.Info,
     SocketEvent.Error,
     SocketEvent.Parameters,
@@ -31,7 +31,7 @@ const socketLoggingEvents = [
 ]
 
 const allSocketEvents = [
-    ...socketLoggingEvents,
+    ...commandEvents,
     SocketEvent.Connect,
     SocketEvent.Disconnect,
     SocketEvent.ConnectError
@@ -49,7 +49,7 @@ export const runCommand = async (taskName, displayText) => {
     })
     socket.on(SocketEvent.Disconnect, () => console.log("Server disconnected"));
     
-    socketLoggingEvents.forEach(e => socket.on(e, (data) => LogStatus(e, data)))
+    commandEvents.forEach(e => socket.on(e, (data) => LogStatus(e, data)))
     
 
     const response = await fetch(url);

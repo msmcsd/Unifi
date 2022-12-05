@@ -6,6 +6,9 @@ import DosCommandList from './components/DosCommandList';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import URL from './constants/Url';
 import { fetchAllTasks } from './data/fetchData';
+import { Box } from '@mui/system';
+import StatusGrid from './components/StatusGrid';
+import { Grid } from '@mui/material';
 
 function App() {
   const [tasks, setTasks] = useState([{
@@ -31,11 +34,38 @@ function App() {
   return (
     <div className="App">
       {/* <CommandsContextProvider> */}
-      <ThemeProvider theme={theme}>
-        {
-          tasks.map(t => (t.commands && t.commands.length > 0 && <DosCommandList key={t.name} task={t} />))
-        }
-        </ThemeProvider>
+      {/* <ThemeProvider theme={theme}> */}
+        <Grid // Main grid that covers the whole client area. There are 3 columnds.
+          container
+          direction="row"
+          alignItems="flex-start"
+        >
+          <Grid item  // Column 2: displays dos commands
+          >
+            <Grid
+              container
+              direction= "column"
+              flexWrap="wrap"
+            >
+              {
+                tasks.map(t => (t.commands && t.commands.length > 0 && <DosCommandList key={t.name} task={t} />))
+              }
+            </Grid>
+          </Grid>
+          <Grid item // Column 3: displays logs
+          > 
+            <Grid
+            container
+            flexGrow={1}
+            >
+              <Grid item>
+                <StatusGrid/>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* </ThemeProvider> */}
       {/* </CommandsContextProvider> */}
     </div>
   )

@@ -16,14 +16,15 @@ function DosCommandList(props) {
             width: 250,
             borderRadius: 1,
             bgcolor: 'white',
-            border: '1px solid grey'
+            border: '1px solid grey',
+            fontSize: '14px'
         }}>{ task.name }
             <Divider/>
             <List disablePadding dense={true}>
                 {task.commands.map(c =>
                     <ListItem disablePadding key={c.displayText} >
-                        <ListItemButton sx={{height:20}} onClick={() => runCommand(task.name, c.displayText)}>
-                            <ListItemText primary={c.displayText} />
+                        <ListItemButton sx={{height:18}} onClick={() => runCommand(task.name, c.displayText)}>
+                            <ListItemText primaryTypographyProps={{fontSize: '12px'}} primary={c.displayText} />
                         </ListItemButton>
                     </ListItem>
                 )}
