@@ -5,26 +5,22 @@ import ReducerAction from '../constants/ReducerAction';
 import { CommandsContext } from '../contexts/CommandsContext';
 
 const setTextColorByLogType = (params) => {
-  let textColor = "";
-  
-  switch (params.row.type) {
-    case SocketEvent.Error:
-      textColor = "red";
-      break;
-    case SocketEvent.Parameters:
-      textColor = "blue";
-      break;
-    case SocketEvent.Progress:
-      textColor = "green";
-      break;
-    default:
+
+  const getColor = () => {
+    switch (params.row.type) {
+      case SocketEvent.Error: return "red";
+      case SocketEvent.Parameters: return "blue";
+      case SocketEvent.Progress: return "green";
+      default:
+    }
   }
+  
   // console.log(params.row.type)
   // console.log(textColor)
   return (
         <div
           style={{
-            color: `${textColor}`,
+            color: `${getColor()}`,
             // textAlign: "left",
             fontSize: 13
           }}
@@ -35,10 +31,10 @@ const setTextColorByLogType = (params) => {
 }
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 10 },
+  { field: 'id', headerName: '', width: 10 },
   {
     field: 'type',
-    headerName: 'type',
+    headerName: '',
     width: 50,
   },
   {

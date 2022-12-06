@@ -4,26 +4,33 @@ import { useEffect, useState } from 'react';
 import CommandsContextProvider from './contexts/CommandsContext';
 import DosCommandList from './components/DosCommandList';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import URL from './constants/Url';
 import { fetchAllTasks } from './data/fetchData';
-import { Box } from '@mui/system';
 import StatusGrid from './components/StatusGrid';
 import { Grid } from '@mui/material';
+import CommandGroup from "./constants/CommandGroup";
+import InstallCommandList from './components/InstallCommandList';
 
-function App() {
-  const [tasks, setTasks] = useState([{
+const defaultTask = {
     "name": "",
     "commandGroup": 1,
     "commands": [
       { "displayText": "" }
     ]
-  }])
+}
+
+function App() {
+  const [tasks, setTasks] = useState([defaultTask])
+  const [installTasks, setInstallTasks] = useState([defaultTask])
+  const [downloadTask, setDownloadTask] = useState(defaultTask)
 
   useEffect(() => {
     const fetchTasks = async () => {
       const data = await fetchAllTasks();
       console.log("Fetch all tasks in App.js");
-      setTasks(data.filter(t => t.commandGroup === 1));
+      
+      setTasks(data.filter(t => t.commandGroup === CommandGroup.Dos));
+      setInstallTasks(data.filter(t => t.commandGroup === CommandGroup.Install));
+      setDownloadTask(data.filter(t => t.commandGroup === CommandGroup.Download )[0]);
     }
 
     fetchTasks();
@@ -40,6 +47,11 @@ function App() {
           direction="row"
           alignItems="flex-start"
         >
+          <Grid item  // Column 1: displays install and download commands
+            >
+              <InstallCommandList name="Install" tasks={installTasks} />
+              <DosCommandList key={downloadTask.name} task={downloadTask} />
+          </Grid>  
           <Grid item  // Column 2: displays dos commands
           >
             <Grid

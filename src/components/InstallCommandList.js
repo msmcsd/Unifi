@@ -4,14 +4,13 @@ import { Box } from '@mui/system';
 import { runCommand } from '../data/fetchData';
 import { CommandsContext } from '../contexts/CommandsContext';
 
-function DosCommandList(props) {
-    const task = props.task;
+function InstallCommandList(props) {
+    const tasks = props.tasks;
     const {dispatch} = useContext(CommandsContext);
 
-    // console.log(task);
-    // useEffect(() => {
+    useEffect(() => {
         // console.log("Populating dos commands: ", task.name);
-    // }, [task])
+    }, [tasks])
 
     const onItemClicked = (taskName, displayText) => {
         
@@ -26,13 +25,13 @@ function DosCommandList(props) {
             bgcolor: 'white',
             border: '1px solid grey',
             fontSize: '14px'
-        }}>{ task.name }
+         }}>{props.name}
             <Divider/>
             <List disablePadding dense={true}>
-                {task.commands.map(c =>
-                    <ListItem disablePadding key={c.displayText} >
-                        <ListItemButton sx={{height:16}} onClick={() => onItemClicked(task.name, c.displayText)}>
-                            <ListItemText primaryTypographyProps={{fontSize: '12px'}} primary={c.displayText} />
+                {tasks.map(t =>
+                    <ListItem disablePadding key={t.name} >
+                        <ListItemButton sx={{height:16}} onClick={() => onItemClicked(props.name, t.name)}>
+                            <ListItemText primaryTypographyProps={{fontSize: '12px'}} primary={t.name} />
                         </ListItemButton>
                     </ListItem>
                 )}
@@ -41,4 +40,4 @@ function DosCommandList(props) {
     )
 }
 
-export default DosCommandList;
+export default InstallCommandList;

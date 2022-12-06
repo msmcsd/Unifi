@@ -41,7 +41,7 @@ const allSocketEvents = [
 
 export const runCommand = async (taskName, displayText, dispatch) => {
     // console.log(taskName, displayText);
-    const url = URL.COMMAND + "?taskName=" + taskName + "&displayText=" + encodeURIComponent(displayText);
+    const url = URL.COMMAND + "?taskName=" + encodeURIComponent(taskName) + "&displayText=" + encodeURIComponent(displayText);
     // console.log(url);
 
     const socket = io(URL.SOCKET);
@@ -51,9 +51,10 @@ export const runCommand = async (taskName, displayText, dispatch) => {
     })
     socket.on(SocketEvent.Disconnect, () => console.log("Server disconnected"));
     
-    commandEvents.forEach(e => socket.on(e, (data) => LogStatus(e, data, dispatch)))
+    commandEvents.forEach(socketEvent => socket.on(socketEvent, (data) =>
+        dispatch({ type: ReducerAction.AddLog, payload: { id: uuid(), type: socketEvent, log: data } })
+    ))
     
-
     const response = await fetch(url);
     const data = await response.json();
     console.log(data.result);
@@ -61,9 +62,4 @@ export const runCommand = async (taskName, displayText, dispatch) => {
     // Unregister events
     allSocketEvents.forEach(e => socket.off(e));
     socket.disconnect();
-}
-
-function LogStatus(socketEvent, message, dispatch) {
-    // console.log(socketEvent, message);
-    dispatch({ type: ReducerAction.AddLog, payload: { id: uuid(), type: socketEvent, log: message } });
 }
