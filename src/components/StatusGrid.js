@@ -94,7 +94,7 @@ function StatusGrid() {
           columns: {
             columnVisibilityModel: {
               id: false,
-              // type: false,
+              type: false,
             },
           },
         }}
