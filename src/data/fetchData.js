@@ -39,10 +39,12 @@ const allSocketEvents = [
     SocketEvent.ConnectError
 ]
 
-export const runCommand = async (taskName, displayText, dispatch) => {
+export const runCommand = async (taskName, displayText, uisettings, dispatch) => {
     // console.log(taskName, displayText);
-    const url = URL.COMMAND + "?taskName=" + encodeURIComponent(taskName) + "&displayText=" + encodeURIComponent(displayText);
-    // console.log(url);
+    const url = URL.COMMAND + "?taskName=" + encodeURIComponent(taskName)
+        + "&displayText=" + encodeURIComponent(displayText)
+        + "&parameters=" + encodeURIComponent(JSON.stringify(uisettings));
+    console.log(url);
 
     const socket = io(URL.SOCKET);
     socket.on(SocketEvent.Connect, () => console.log("Connected to socket server", socket.id));

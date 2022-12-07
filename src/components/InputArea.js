@@ -4,11 +4,6 @@ import ReducerAction from "../constants/ReducerAction";
 import { CommandsContext } from "../contexts/CommandsContext";
 
 const configs = ["r01", "r02", "qa2"]
-const defaultSettings = {
-  config: "r01",
-  debug: false,
-  installFolder: "C:\\Program Files\\123"
-}
 
 const InputArea = () => {
   // const [installFolder, setInstallFolder] = useState(defaultSettings.installFolder)
@@ -27,13 +22,13 @@ const InputArea = () => {
   const handleIsDebugChange = (e) => {
     // setIsDebug(e.target.checked)
     // console.log(e.target.checked)
-    dispatchUISettings({ type: ReducerAction.UpdateDebug, debug: e.target.checked})
+    dispatchUISettings({ type: ReducerAction.UpdateDebug, debug: e.target.checked? "Debug" : ""})
   }
 
   const handleConfigChange = (e) => {
     // setConfig(e.target.value)
     // console.log(e.target.value)
-      dispatchUISettings({ type: ReducerAction.UpdateInstallFolder, payload: e.target.value})
+      dispatchUISettings({ type: ReducerAction.UpdateConfig, payload: e.target.value})
   }
 
   return (
@@ -53,7 +48,7 @@ const InputArea = () => {
           <RadioGroup
             row
             aria-labelledby="demo-radio-buttons-group-label"
-            value={uiSettings.config}
+            value={uiSettings.getconfig}
             name="radio-buttons-group"
             onChange={e=>handleConfigChange(e)}
           >
@@ -65,7 +60,7 @@ const InputArea = () => {
       </Box>
       <Box display="flex" sx={{ml: 2}}>
         <FormControlLabel
-          control={<Checkbox size="small" checked={uiSettings.debug} onChange={e=>handleIsDebugChange(e)} />}
+          control={<Checkbox size="small" checked={uiSettings.compilemode==="Debug"} onChange={e=>handleIsDebugChange(e)} />}
           label={<Box fontSize={12}>Debug</Box>} />
       </Box>
       <Divider />
@@ -73,7 +68,7 @@ const InputArea = () => {
         <FormControlLabel control={<Typography />} label={<Box fontSize={12}>Install Folder:</Box>} />
         <TextField
           multiline
-          value={uiSettings.installFolder}
+          value={uiSettings.cylancedesktopfolder}
           inputProps={{ style: { fontSize: 12 } }}
           onChange={(e)=> handleInstallFolderChange(e)}
         />

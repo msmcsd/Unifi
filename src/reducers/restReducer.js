@@ -7,11 +7,11 @@ export const restReducer = (state, action) => {
         case ReducerAction.ClearLogs:
             return [];
         case ReducerAction.UpdateConfig:
-            return {...state, config: action.payload};
+            return {...state, getconfig: action.payload};
         case ReducerAction.UpdateDebug:
-            return {...state, debug: action.payload};
+            return {...state, compilemode: action.payload};
         case ReducerAction.UpdateInstallFolder:
-            return {...state, installFolder: action.payload};
+            return {...state, cylancedesktopfolder: action.payload};
         default:
     }
 

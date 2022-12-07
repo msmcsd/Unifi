@@ -6,7 +6,7 @@ import { CommandsContext } from '../contexts/CommandsContext';
 
 function DosCommandList(props) {
     const task = props.task;
-    const {dispatch} = useContext(CommandsContext);
+    const {uiSettings, dispatch} = useContext(CommandsContext);
 
     // console.log(task);
     // useEffect(() => {
@@ -14,8 +14,9 @@ function DosCommandList(props) {
     // }, [task])
 
     const onItemClicked = (taskName, displayText) => {
-        
-        runCommand(taskName, displayText, dispatch);
+        const params = JSON.stringify(uiSettings);
+        console.log(params);
+        runCommand(taskName, displayText, params, dispatch);
     }
 
     return (
