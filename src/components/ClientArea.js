@@ -5,7 +5,8 @@ import { fetchAllTasks } from "../data/fetchData";
 import DosCommandList from "./DosCommandList";
 import InputArea from "./InputArea";
 import InstallCommandList from "./InstallCommandList";
-import StatusGrid from "./StatusGrid";
+import ListGrid from "./loggingArea/List/ListGrid";
+import StatusGrid from "./loggingArea/DataGrid/StatusGrid";
 
 const defaultTask = {
     "name": "",
@@ -65,7 +66,8 @@ const ClientArea = () => {
         flexGrow={1}
         >
           <Grid item>
-            <StatusGrid/>
+            {/* <StatusGrid/> */}
+            <ListGrid />
           </Grid>
         </Grid>
       </Grid>
