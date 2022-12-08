@@ -13,10 +13,16 @@ function DosCommandList(props) {
         // console.log("Populating dos commands: ", task.name);
     // }, [task])
 
-    const onItemClicked = (taskName, displayText) => {
+    const onItemClicked = (e, taskName, displayText) => {
         const params = JSON.stringify(uiSettings);
-        console.log(params);
-        runCommand(taskName, displayText, params, dispatch);
+        console.log(e.type);
+
+        const showCommand = e.type === "contextmenu"
+        runCommand(taskName, displayText, params, dispatch, showCommand);
+
+        if (showCommand) {
+            e.preventDefault();
+        }
     }
 
     return (
@@ -32,7 +38,11 @@ function DosCommandList(props) {
             <List disablePadding dense={true}>
                 {task.commands.map(c =>
                     <ListItem disablePadding key={c.displayText} >
-                        <ListItemButton sx={{height:16}} onClick={() => onItemClicked(task.name, c.displayText)}>
+                        <ListItemButton
+                            sx={{ height: 16 }}
+                            onClick={(e) => onItemClicked(e, task.name, c.displayText)}
+                            onContextMenu={(e) => onItemClicked(e, task.name, c.displayText)}
+                        >
                             <ListItemText primaryTypographyProps={{fontSize: '12px'}} primary={c.displayText} />
                         </ListItemButton>
                     </ListItem>

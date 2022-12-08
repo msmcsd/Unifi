@@ -39,9 +39,9 @@ const allSocketEvents = [
     SocketEvent.ConnectError
 ]
 
-export const runCommand = async (taskName, displayText, uisettings, dispatch) => {
+export const runCommand = async (taskName, displayText, uisettings, dispatch, showCommand) => {
     // console.log(taskName, displayText);
-    const url = URL.COMMAND + "?taskName=" + encodeURIComponent(taskName)
+    const url = (showCommand? URL.SHOW_COMMAND : URL.RUN_COMMAND) + "?taskName=" + encodeURIComponent(taskName)
         + "&displayText=" + encodeURIComponent(displayText)
         + "&parameters=" + encodeURIComponent(JSON.stringify(uisettings));
     console.log(url);
