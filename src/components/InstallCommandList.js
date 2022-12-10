@@ -1,7 +1,7 @@
 import { useEffect, useContext} from 'react';
 import { Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
-import { runCommand } from '../data/fetchData';
+import { runCommand } from '../data/webCommands';
 import { CommandsContext } from '../contexts/CommandsContext';
 
 function InstallCommandList(props) {
@@ -14,7 +14,7 @@ function InstallCommandList(props) {
 
     const onItemClicked = (taskName, displayText) => {
         
-        runCommand(taskName, displayText, dispatch);
+        // runCommand(taskName, displayText, dispatch);
     }
 
     return (

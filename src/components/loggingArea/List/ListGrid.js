@@ -29,7 +29,7 @@ const ListGrid = () => {
     <Box sx={{
           m: 2,
           maxHeight: 600,
-          width: 800,
+          width: 500,
           borderRadius: 1,
           bgcolor: 'white',
           border: '1px solid grey',
@@ -41,7 +41,7 @@ const ListGrid = () => {
           <ListItem
             key={log.id}
             disablePadding
-            sx={{ ml: 1, maxWidth: 760 }}
+            sx={{ ml: 1, maxWidth: 460 }}
             onDoubleClick={() => dispatch({ type: ReducerAction.ClearLogs })}
           >
             <ListItemText primary={log.log} sx={{height: 10}} primaryTypographyProps={{fontSize: 12, color: `${getLogColor(log)}`}} />

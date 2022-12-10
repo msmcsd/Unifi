@@ -8,6 +8,7 @@ const URL = {
     ALL_COMMANDS: API_BASE_URL + "/Commands",
     RUN_COMMAND: API_BASE_URL + "/Command",
     SHOW_COMMAND: API_BASE_URL + "/Command/Show",
+    DOWNLOAD_COMMAND: API_BASE_URL + "/Command/Download",
     SOCKET: SOCKET_BASE_URL
 }
 

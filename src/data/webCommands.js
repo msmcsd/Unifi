@@ -39,11 +39,31 @@ const allSocketEvents = [
     SocketEvent.ConnectError
 ]
 
-export const runCommand = async (taskName, displayText, uisettings, dispatch, showCommand) => {
-    // console.log(taskName, displayText);
-    const url = (showCommand? URL.SHOW_COMMAND : URL.RUN_COMMAND) + "?taskName=" + encodeURIComponent(taskName)
+const createUrl = (commandUrl, taskName, displayText, uiSettings) => {
+    let url = commandUrl + "?taskName=" + encodeURIComponent(taskName)
         + "&displayText=" + encodeURIComponent(displayText)
-        + "&parameters=" + encodeURIComponent(JSON.stringify(uisettings));
+    if (uiSettings !== null)        
+        url += "&parameters=" + encodeURIComponent(JSON.stringify(uiSettings));
+
+    return url;
+}
+
+export const runDosCommand = async (taskName, displayText, uiSettings, dispatch) => {
+    const url = createUrl(URL.RUN_COMMAND, taskName, displayText, uiSettings)
+    runCommand(url, dispatch)
+}
+
+export const runDisplayCommand = async (taskName, displayText, uiSettings, dispatch) => {
+    const url = createUrl(URL.SHOW_COMMAND, taskName, displayText, uiSettings)
+    runCommand(url, dispatch)
+}
+
+export const runDownloadCommand = async (taskName, displayText, installerType, dispatch) => {
+    const url = createUrl(URL.DOWNLOAD_COMMAND, taskName, displayText, {installerType: `${installerType}`})
+    runCommand(url, dispatch)
+}
+
+const runCommand = async (url, dispatch) => {
     console.log(url);
 
     const socket = io(URL.SOCKET);
@@ -53,6 +73,7 @@ export const runCommand = async (taskName, displayText, uisettings, dispatch, sh
     })
     socket.on(SocketEvent.Disconnect, () => console.log("Server disconnected"));
     
+    // Register socket events for logs
     commandEvents.forEach(socketEvent => socket.on(socketEvent, (data) =>
         dispatch({ type: ReducerAction.AddLog, payload: { id: uuid(), type: socketEvent, log: data } })
     ))
@@ -61,7 +82,7 @@ export const runCommand = async (taskName, displayText, uisettings, dispatch, sh
     const data = await response.json();
     console.log(data.result);
 
-    // Unregister events
+    // Unregister socket events for logs
     allSocketEvents.forEach(e => socket.off(e));
     socket.disconnect();
 }

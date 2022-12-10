@@ -1,12 +1,13 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import CommandGroup from "../constants/CommandGroup";
-import { fetchAllTasks } from "../data/fetchData";
-import DosCommandList from "./DosCommandList";
+import { fetchAllTasks } from "../data/webCommands";
+import CommandList from "./CommandList";
 import InputArea from "./InputArea";
 import InstallCommandList from "./InstallCommandList";
 import ListGrid from "./loggingArea/List/ListGrid";
 import StatusGrid from "./loggingArea/DataGrid/StatusGrid";
+import CommandListType from "../constants/CommandListType";
 
 const defaultTask = {
     "name": "",
@@ -45,7 +46,7 @@ const ClientArea = () => {
       >
         <InputArea />
         <InstallCommandList name="Install" tasks={installTasks} />
-        <DosCommandList key={downloadTask.name} task={downloadTask} />
+        <CommandList key={downloadTask.name} task={downloadTask} variant={CommandListType.Download} />
       </Grid>  
       <Grid item  // Column 2: displays dos commands
       >
@@ -55,7 +56,7 @@ const ClientArea = () => {
           flexWrap="wrap"
         >
           {
-            tasks.map(t => (t.commands && t.commands.length > 0 && <DosCommandList key={t.name} task={t} />))
+            tasks.map(t => (t.commands && t.commands.length > 0 && <CommandList key={t.name} variant={CommandListType.Dos} task={t}/>))
           }
         </Grid>
       </Grid>
