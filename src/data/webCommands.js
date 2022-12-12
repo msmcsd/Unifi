@@ -41,7 +41,10 @@ const allSocketEvents = [
 
 const createUrl = (commandUrl, taskName, displayText, uiSettings) => {
     let url = commandUrl + "?taskName=" + encodeURIComponent(taskName)
-        + "&displayText=" + encodeURIComponent(displayText)
+
+    if (displayText !== null)
+        url += "&displayText=" + encodeURIComponent(displayText)
+    
     if (uiSettings !== null)        
         url += "&parameters=" + encodeURIComponent(JSON.stringify(uiSettings));
 
@@ -54,7 +57,17 @@ export const runDosCommand = async (taskName, displayText, uiSettings, dispatch)
 }
 
 export const runDisplayCommand = async (taskName, displayText, uiSettings, dispatch) => {
-    const url = createUrl(URL.SHOW_COMMAND, taskName, displayText, uiSettings)
+    const url = createUrl(URL.DISPLAY_COMMAND, taskName, displayText, uiSettings)
+    runCommand(url, dispatch)
+}
+
+export const runDisplayTask = async (taskName, uiSettings, dispatch) => {
+    const url = createUrl(URL.DISPLAY_TASK, taskName, null, uiSettings)
+    runCommand(url, dispatch)
+}
+
+export const runInstallCommand = async (taskName, uiSettings, dispatch) => {
+    const url = createUrl(URL.INSTALL_COMMAND, taskName, null, uiSettings)
     runCommand(url, dispatch)
 }
 

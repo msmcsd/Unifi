@@ -4,7 +4,6 @@ import CommandGroup from "../constants/CommandGroup";
 import { fetchAllTasks } from "../data/webCommands";
 import CommandList from "./CommandList";
 import InputArea from "./InputArea";
-import InstallCommandList from "./InstallCommandList";
 import ListGrid from "./loggingArea/List/ListGrid";
 import StatusGrid from "./loggingArea/DataGrid/StatusGrid";
 import CommandListType from "../constants/CommandListType";
@@ -45,8 +44,8 @@ const ClientArea = () => {
       <Grid item  // Column 1: displays install and download commands
       >
         <InputArea />
-        <InstallCommandList name="Install" tasks={installTasks} />
-        <CommandList key={downloadTask.name} task={downloadTask} variant={CommandListType.Download} />
+        <CommandList name="Install" list={installTasks} variant={CommandListType.Install} />
+        <CommandList key={downloadTask.name} list={downloadTask.commands} variant={CommandListType.Download} />
       </Grid>  
       <Grid item  // Column 2: displays dos commands
       >
@@ -56,7 +55,7 @@ const ClientArea = () => {
           flexWrap="wrap"
         >
           {
-            tasks.map(t => (t.commands && t.commands.length > 0 && <CommandList key={t.name} variant={CommandListType.Dos} task={t}/>))
+            tasks.map(t => (t.commands && t.commands.length > 0 && <CommandList key={t.name} name={t.name} variant={CommandListType.Dos} list={t.commands}/>))
           }
         </Grid>
       </Grid>

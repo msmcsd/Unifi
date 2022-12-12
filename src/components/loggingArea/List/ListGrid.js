@@ -29,7 +29,7 @@ const ListGrid = () => {
     <Box sx={{
           m: 2,
           maxHeight: 600,
-          width: 500,
+          width: 700,
           borderRadius: 1,
           bgcolor: 'white',
           border: '1px solid grey',
@@ -41,10 +41,13 @@ const ListGrid = () => {
           <ListItem
             key={log.id}
             disablePadding
-            sx={{ ml: 1, maxWidth: 460 }}
+            sx={{ ml: 1, maxWidth: 660 }}
             onDoubleClick={() => dispatch({ type: ReducerAction.ClearLogs })}
           >
-            <ListItemText primary={log.log} sx={{height: 10}} primaryTypographyProps={{fontSize: 12, color: `${getLogColor(log)}`}} />
+            <ListItemText 
+              primary={log.log} 
+              sx={{height: 10}} 
+              primaryTypographyProps={{fontSize: 12, color: `${getLogColor(log)}`, style: { whiteSpace: "normal" }}} />
           </ListItem>
         ))}
         <ListItem ref={scrollRef} />
