@@ -1,4 +1,4 @@
-import { Box, List, ListItem, ListItemText } from "@mui/material"
+import { Box, List, ListItem, ListItemText, Typography } from "@mui/material"
 import { useContext, useEffect, useRef } from "react"
 import ReducerAction from "../../../constants/ReducerAction"
 import SocketEvent from "../../../constants/SocketEvent"
@@ -44,10 +44,11 @@ const ListGrid = () => {
             sx={{ ml: 1, maxWidth: 660 }}
             onDoubleClick={() => dispatch({ type: ReducerAction.ClearLogs })}
           >
-            <ListItemText 
+            {/* <ListItemText 
               primary={log.log} 
               sx={{height: 10}} 
-              primaryTypographyProps={{fontSize: 12, color: `${getLogColor(log)}`, style: { whiteSpace: "normal" }}} />
+              primaryTypographyProps={{fontSize: 12, color: `${getLogColor(log)}`, style: { whiteSpace: "normal" }}} /> */}
+            <Typography sx={{fontSize: 12, color: `${getLogColor(log)}`}}>{log.log}</Typography>
           </ListItem>
         ))}
         <ListItem ref={scrollRef} />
