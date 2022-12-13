@@ -45,7 +45,7 @@ const ClientArea = () => {
       >
         <InputArea />
         <CommandList name="Install" list={installTasks} variant={CommandListType.Install} />
-        <CommandList key={downloadTask.name} list={downloadTask.commands} variant={CommandListType.Download} />
+        <CommandList key={downloadTask.name} name={downloadTask.name} list={downloadTask.commands} variant={CommandListType.Download} />
       </Grid>  
       <Grid item  // Column 2: displays dos commands
       >

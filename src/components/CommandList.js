@@ -23,7 +23,7 @@ function CommandList({name, variant, list}) {
     const singleClick = (e) => {
         const taskName = arguments[0].name
         const displayText = e.target.innerText
-        // console.log(taskName, displayText)
+        console.log(taskName, displayText)
         
         switch (e.button) {
             case 0:
