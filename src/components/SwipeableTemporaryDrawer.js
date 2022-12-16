@@ -1,7 +1,6 @@
-import * as React from 'react';
+import { useState, useContext } from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -12,16 +11,16 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { CommandsContext } from '../contexts/CommandsContext';
+import { runDosCommand } from '../data/webCommands';
 
-export default function SwipeableTemporaryDrawer() {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+export default function SwipeableTemporaryDrawer({task}) {
+  const { uiSettings, dispatch } = useContext(CommandsContext);
 
-  const toggleDrawer = (anchor, open) => (event) => {
+  const [open, setOpen] = useState(false)
+
+
+  const toggleDrawer = (open) => (event) => {
     if (
       event &&
       event.type === 'keydown' &&
@@ -30,37 +29,28 @@ export default function SwipeableTemporaryDrawer() {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    setOpen(open);
   };
 
-  const list = (anchor) => (
+  const handleClick = (e, displayText) => {
+    runDosCommand(task.name, displayText, JSON.stringify(uiSettings), dispatch)
+  }
+
+  const list = () => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: 250 }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+        {task.commands.map((command, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton onClick={e => handleClick(e, command.displayText)}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={command.displayText} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -69,29 +59,24 @@ export default function SwipeableTemporaryDrawer() {
   );
 
   return (
-    <div>
-      {['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={toggleDrawer(anchor, true)}
-            // sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <SwipeableDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
-          >
-            {list(anchor)}
-          </SwipeableDrawer>
-        </React.Fragment>
-      ))}
-    </div>
-  );
+    <>
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        edge="start"
+        onClick={toggleDrawer(true)}
+        // sx={{ mr: 2, display: { sm: 'none' } }}
+      >
+        <MenuIcon />
+      </IconButton>
+      <SwipeableDrawer
+        anchor="left"
+        open={open}
+        onClose={toggleDrawer(false)}
+        onOpen={toggleDrawer(true)}
+      >
+        {list()}
+      </SwipeableDrawer>
+    </>
+  )
 }
