@@ -5,20 +5,19 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { CommandsContext } from '../contexts/CommandsContext';
 import { runDosCommand } from '../data/webCommands';
+import { Avatar } from '@mui/material';
 
 export default function SwipeableTemporaryDrawer({task}) {
   const { uiSettings, dispatch } = useContext(CommandsContext);
 
   const [open, setOpen] = useState(false)
 
+  // console.log(task.commands)
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -46,11 +45,9 @@ export default function SwipeableTemporaryDrawer({task}) {
       <List>
         {task.commands.map((command, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton onClick={e => handleClick(e, command.displayText)}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={command.displayText} />
+            <ListItemButton sx={{height: 32}} onClick={e => handleClick(e, command.displayText)}>
+              <Avatar sx={{width: 32, height:32}} alt="" src={command.taskImage && require("../images/" + command.taskImage)} />
+              <ListItemText sx={{ml: 2}} primary={command.displayText} primaryTypographyProps={{fontSize: 12}} />
             </ListItemButton>
           </ListItem>
         ))}
