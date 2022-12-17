@@ -14,7 +14,6 @@ import { Avatar } from '@mui/material';
 
 export default function SwipeableTemporaryDrawer({task}) {
   const { uiSettings, dispatch } = useContext(CommandsContext);
-
   const [open, setOpen] = useState(false)
 
   // console.log(task.commands)
@@ -31,7 +30,7 @@ export default function SwipeableTemporaryDrawer({task}) {
     setOpen(open);
   };
 
-  const handleClick = (e, displayText) => {
+  const handleClick = (displayText) => {
     runDosCommand(task.name, displayText, JSON.stringify(uiSettings), dispatch)
   }
 
@@ -45,7 +44,7 @@ export default function SwipeableTemporaryDrawer({task}) {
       <List>
         {task.commands.map((command, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton sx={{height: 32}} onClick={e => handleClick(e, command.displayText)}>
+            <ListItemButton sx={{height: 32}} onClick={e => handleClick(command.displayText)}>
               <Avatar sx={{width: 32, height:32}} alt="" src={command.taskImage && require("../images/" + command.taskImage)} />
               <ListItemText sx={{ml: 2}} primary={command.displayText} primaryTypographyProps={{fontSize: 12}} />
             </ListItemButton>
@@ -62,6 +61,7 @@ export default function SwipeableTemporaryDrawer({task}) {
         aria-label="open drawer"
         edge="start"
         onClick={toggleDrawer(true)}
+        onMouseOver={toggleDrawer(true)}
         // sx={{ mr: 2, display: { sm: 'none' } }}
       >
         <MenuIcon />

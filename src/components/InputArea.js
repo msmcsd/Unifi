@@ -7,11 +7,12 @@ const configs = ["r01", "r02", "qa2"]
 
 const InputArea = () => {
   // const [installFolder, setInstallFolder] = useState(defaultSettings.installFolder)
-  // const [isDebug, setIsDebug] = useState(defaultSettings.debug)
   // const [config, setConfig] = useState(defaultSettings.config)
 
   const { uiSettings, dispatchUISettings } = useContext(CommandsContext);
   // console.log(uiSettings)
+
+  const [isDebug, setIsDebug] = useState(uiSettings.compilemode === "Debug")
 
   const handleInstallFolderChange = (e) => {
     //setInstallFolder(e.target.value)
@@ -20,8 +21,7 @@ const InputArea = () => {
   }
 
   const handleIsDebugChange = (e) => {
-    // setIsDebug(e.target.checked)
-    // console.log(e.target.checked)
+    setIsDebug(e.target.checked)
     dispatchUISettings({ type: ReducerAction.UpdateDebug, debug: e.target.checked? "Debug" : ""})
   }
 
@@ -60,7 +60,7 @@ const InputArea = () => {
       </Box>
       <Box display="flex" sx={{ml: 2}}>
         <FormControlLabel
-          control={<Checkbox size="small" checked={uiSettings.compilemode==="Debug"} onChange={e=>handleIsDebugChange(e)} />}
+          control={<Checkbox size="small" checked={isDebug} onChange={e=>handleIsDebugChange(e)} />}
           label={<Box fontSize={12}>Debug</Box>} />
       </Box>
       <Divider />
