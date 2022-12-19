@@ -29,7 +29,7 @@ const ListGrid = () => {
     <Box sx={{
           m: 1,
           height: 400,
-          width: 700,
+          // width: 700,
           borderRadius: 1,
           bgcolor: 'white',
           border: '1px solid grey',

@@ -34,7 +34,7 @@ const InputArea = () => {
   return (
     <Box sx={{
             m: 1,
-            width: 220,
+            // width: 220,
             borderRadius: 1,
             bgcolor: 'white',
             border: '1px solid grey',

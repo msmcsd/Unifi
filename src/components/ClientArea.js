@@ -4,8 +4,10 @@ import InputArea from "./InputArea";
 import ListGrid from "./loggingArea/List/ListGrid";
 // import StatusGrid from "./loggingArea/DataGrid/StatusGrid";
 import CommandListType from "../constants/CommandListType";
+import BatchCommandList from "./BatchCommandList";
+import ReportList from "./ReportList";
 
-const ClientArea = ({dosTasks, installTasks, downloadTask }) => {
+const ClientArea = ({ dosTasks, installTasks, downloadTask, batchTasks }) => {
 
   return (
     <Grid // Main grid that covers the whole client area. There are 3 columnds.
@@ -38,13 +40,18 @@ const ClientArea = ({dosTasks, installTasks, downloadTask }) => {
       <Grid item xs={1} md={6} // Column 3: displays logs
       > 
         <Grid
-        container
-        flexGrow={1}
+          container
+          // flexGrow={1}
+          //  sx={{backgroundColor: "green"}}
         >
-          <Grid item>
+          <Grid item xs={12}>
             {/* <StatusGrid/> */}
             <ListGrid />
           </Grid>
+        </Grid>
+        <Grid container direction="row">
+          <Grid item xs={5}><BatchCommandList tasks={batchTasks} /></Grid>
+          <Grid item xs={7}><ReportList/></Grid>
         </Grid>
       </Grid>
     </Grid>

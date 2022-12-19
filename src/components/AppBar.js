@@ -36,6 +36,7 @@ function AppBar() {
   const [installTasks, setInstallTasks] = useState([defaultTask])
   const [downloadTask, setDownloadTask] = useState(defaultTask)
   const [drawerTask, setDrawerTasks] = useState(defaultTask)
+  const [batchTasks, setBatchTasks] = useState([defaultTask])
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -47,6 +48,7 @@ function AppBar() {
       // setDownloadTask(data.filter(t => t.commandGroup === CommandGroup.Download )[0]);
       setDownloadTask(data.find(t => t.commandGroup === CommandGroup.Download ));
       setDrawerTasks(data.find(t => t.commandGroup === CommandGroup.Taskbar ));
+      setBatchTasks(data.filter(t => t.commandGroup === CommandGroup.Batch ));
     }
 
     fetchTasks();
@@ -74,7 +76,7 @@ function AppBar() {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <ClientArea dosTasks={dosTasks} installTasks={installTasks} downloadTask={downloadTask} />
+        <ClientArea dosTasks={dosTasks} installTasks={installTasks} downloadTask={downloadTask} batchTasks={ batchTasks } />
       </Box>
     </Box>
   );
