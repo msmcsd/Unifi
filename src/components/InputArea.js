@@ -33,7 +33,7 @@ const InputArea = () => {
 
   return (
     <Box sx={{
-            m: 2,
+            m: 1,
             width: 220,
             borderRadius: 1,
             bgcolor: 'white',
@@ -64,8 +64,8 @@ const InputArea = () => {
           label={<Box fontSize={12}>Debug</Box>} />
       </Box>
       <Divider />
-      <Box display="flex" sx={{ml: 2}}>
-        <FormControlLabel control={<Typography />} label={<Box fontSize={12}>Install Folder:</Box>} />
+      <Box display="flex" flexDirection="column">
+        <FormControlLabel sx={{ml: 1, mt: 2}} control={<Typography />} label={<Box fontSize={12}>Install Folder:</Box>} />
         <TextField
           multiline
           value={uiSettings.cylancedesktopfolder}

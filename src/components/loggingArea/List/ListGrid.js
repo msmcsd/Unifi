@@ -27,8 +27,8 @@ const ListGrid = () => {
 
   return (
     <Box sx={{
-          m: 2,
-          maxHeight: 600,
+          m: 1,
+          height: 400,
           width: 700,
           borderRadius: 1,
           bgcolor: 'white',

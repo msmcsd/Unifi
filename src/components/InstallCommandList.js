@@ -19,7 +19,7 @@ function InstallCommandList(props) {
 
     return (
         <Box sx={{
-            m: 2,
+            m: 1,
             width: 250,
             borderRadius: 1,
             bgcolor: 'white',

@@ -97,7 +97,7 @@ function CommandList({name, variant, list}) {
 
     return (
         <Box sx={{
-            m: 2,
+            m: 1,
             width: 220,
             borderRadius: 1,
             bgcolor: 'white',
