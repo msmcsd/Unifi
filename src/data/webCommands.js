@@ -56,6 +56,11 @@ export const runDosCommand = async (taskName, displayText, uiSettings, dispatch)
     runCommand(url, dispatch)
 }
 
+export const runReportCommand = async (taskName, displayText, uiSettings, dispatch) => {
+    const url = createUrl(URL.REPORT_COMMAND, taskName, displayText, uiSettings)
+    runCommand(url, dispatch)
+}
+
 export const runDisplayCommand = async (taskName, displayText, uiSettings, dispatch) => {
     const url = createUrl(URL.DISPLAY_COMMAND, taskName, displayText, uiSettings)
     runCommand(url, dispatch)
@@ -77,7 +82,7 @@ export const runDownloadCommand = async (taskName, displayText, installerType, d
 }
 
 const runCommand = async (url, dispatch) => {
-    console.log(url);
+    // console.log(url);
 
     const socket = io(URL.SOCKET);
     socket.on(SocketEvent.Connect, () => console.log("Connected to socket server", socket.id));
@@ -91,11 +96,20 @@ const runCommand = async (url, dispatch) => {
         dispatch({ type: ReducerAction.AddLog, payload: { id: uuid(), type: socketEvent, log: data } })
     ))
     
+    // Register socket event for report results
+    socket.on(SocketEvent.Report, data => {
+        // console.log("--------", data)
+        dispatch({ type: ReducerAction.Report, payload: data })
+    })
+
     const response = await fetch(url);
     const data = await response.json();
     console.log(data.result);
 
     // Unregister socket events for logs
     allSocketEvents.forEach(e => socket.off(e));
+    
+    // Unregister socket events for report
+    socket.off(SocketEvent.Report)
     socket.disconnect();
 }

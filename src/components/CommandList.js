@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import { Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
-import { runDosCommand, runDownloadCommand, runDisplayCommand, runDisplayTask, runInstallCommand } from '../data/webCommands';
+import { runDosCommand, runDownloadCommand, runDisplayCommand, runDisplayTask, runInstallCommand, runReportCommand } from '../data/webCommands';
 import { CommandsContext } from '../contexts/CommandsContext';
 import CommandListType from '../constants/CommandListType';
 import InstallerType from '../constants/InstallerType';
 import SupportDoubleClick from './SupportDoubleClick';
 
 function CommandList({name, variant, list}) {
-    const { uiSettings, dispatch } = useContext(CommandsContext);
+    const { uiSettings, dispatch, dispatchReports } = useContext(CommandsContext);
 
     // console.log(task);
     // useEffect(() => {
@@ -29,7 +29,10 @@ function CommandList({name, variant, list}) {
             case 0:
                 if (variant === CommandListType.Dos) {
                     console.log('Left single click on Dos command')
-                    runDosCommand(taskName, displayText, JSON.stringify(uiSettings), dispatch)
+                    if (displayText === "Show Installed Report")
+                        runReportCommand(taskName, displayText, JSON.stringify(uiSettings), dispatchReports)
+                    else
+                        runDosCommand(taskName, displayText, JSON.stringify(uiSettings), dispatch)
                 }
                 break;
             case 1:

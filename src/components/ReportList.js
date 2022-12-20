@@ -1,22 +1,24 @@
 import { Box } from '@mui/system';
 import { DataGrid } from '@mui/x-data-grid';
+import { useContext } from 'react';
+import { CommandsContext } from '../contexts/CommandsContext';
 
 const reportItem = {
   id: 0,
   category: "",
   test: "",
   keyword: "",
-  success: "0"
+  passed: false
 }
 
 const reportItems = [
-  {id: 0, category: "Service", test: "Service Status", keyword: "Running", success: "1"},
-  {id: 1, category: "Service", test: "Driver Status", keyword: "Running", success: "1"},
-  {id: 2, category: "ELAM/AM-PPL", test: "AM-PPL Driver Status", keyword: "ANTIMALWARE LIGHT", success: "0"},
+  {id: 0, category: "Service", test: "Service Status", keyword: "Running", passed: true},
+  {id: 1, category: "Service", test: "Driver Status", keyword: "Running", passed: true},
+  {id: 2, category: "ELAM/AM-PPL", test: "AM-PPL Driver Status", keyword: "ANTIMALWARE LIGHT", passed: false},
 ]
 
 const setCellBackcolor = (params) => {
-  const color = params.row.success === "1" ? "green" : "red"
+  const color = params.row.passed ? "green" : "red"
  
   return (
       <div
@@ -60,7 +62,7 @@ const columns = [
     renderCell: (params) => setCellBackcolor(params)
   },
   {
-    field: 'success',
+    field: 'passed',
     headerName: '',
     sortable: false,
     width: 50,
@@ -68,6 +70,9 @@ const columns = [
 ];
 
 const ReportList = () => {
+  const { reports } = useContext(CommandsContext, []);
+
+  console.log(reports)
 
   return (
     <Box sx={{
@@ -84,7 +89,7 @@ const ReportList = () => {
           columns: {
             columnVisibilityModel: {
               id: false,
-              success: false,
+              passed: false,
             },
           },
         }}
@@ -93,12 +98,13 @@ const ReportList = () => {
             outline: "none !important",
           }
         }}
-        rows={reportItems}
+        rows={reports}
         columns={columns}
         hideFooter={true}
         // onCellDoubleClick={() => dispatch({type: ReducerAction.ClearLogs})}
         getRowHeight={() => 16}
         headerHeight={25}
+        getRowId={row => row.id}
         // Remove column header menus
         disableColumnMenu
         disableColumnFilter

@@ -11,6 +11,7 @@ const URL = {
     DISPLAY_TASK: API_BASE_URL + "/Command/DisplayTask",
     DOWNLOAD_COMMAND: API_BASE_URL + "/Command/Download",
     INSTALL_COMMAND: API_BASE_URL + "/Command/Install",
+    REPORT_COMMAND: API_BASE_URL + "/Command/Report",
     SOCKET: SOCKET_BASE_URL
 }
 

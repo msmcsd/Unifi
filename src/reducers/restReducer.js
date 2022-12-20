@@ -12,6 +12,8 @@ export const restReducer = (state, action) => {
             return {...state, compilemode: action.payload};
         case ReducerAction.UpdateInstallFolder:
             return {...state, cylancedesktopfolder: action.payload};
+        case ReducerAction.Report:
+            return JSON.parse(action.payload);
         default:
     }
 
