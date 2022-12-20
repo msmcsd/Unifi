@@ -3,7 +3,8 @@ const ReducerAction = {
   ClearLogs: "REMOVE_LOGS",                     // Clear all logs in StatusGrid
   UpdateConfig: "UPDATE_CONFIG",                // Update config selection change on UI
   UpdateDebug: "UPDATE_DEBUG",                  // Update Debug change on UI
-  UpdateInstallFolder: "UPDATE_INSTALL_FOLDER"  // Update Install Folder change on UI
+  UpdateInstallFolder: "UPDATE_INSTALL_FOLDER", // Update Install Folder change on UI
+  ShowReport: "SHOW_REPORT"
 }
 
 export default ReducerAction;
