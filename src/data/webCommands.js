@@ -51,33 +51,9 @@ const createUrl = (commandUrl, taskName, displayText, uiSettings) => {
     return url;
 }
 
-export const runDosCommand = async (taskName, displayText, uiSettings, dispatch) => {
-    const url = createUrl(URL.RUN_COMMAND, taskName, displayText, uiSettings)
-    runCommand(url, dispatch)
-}
-
-export const runReportCommand = async (taskName, displayText, uiSettings, dispatch) => {
-    const url = createUrl(URL.REPORT_COMMAND, taskName, displayText, uiSettings)
-    runCommand(url, dispatch)
-}
-
-export const runDisplayCommand = async (taskName, displayText, uiSettings, dispatch) => {
-    const url = createUrl(URL.DISPLAY_COMMAND, taskName, displayText, uiSettings)
-    runCommand(url, dispatch)
-}
-
-export const runDisplayTask = async (taskName, uiSettings, dispatch) => {
-    const url = createUrl(URL.DISPLAY_TASK, taskName, null, uiSettings)
-    runCommand(url, dispatch)
-}
-
-export const runInstallCommand = async (taskName, uiSettings, dispatch) => {
-    const url = createUrl(URL.INSTALL_COMMAND, taskName, null, uiSettings)
-    runCommand(url, dispatch)
-}
-
-export const runDownloadCommand = async (taskName, displayText, installerType, dispatch) => {
-    const url = createUrl(URL.DOWNLOAD_COMMAND, taskName, displayText, {installerType: `${installerType}`})
+export const runRestCommand = async (commandUrl, taskName, displayText, settings, dispatch) => {
+    console.log("command url", commandUrl)
+    const url = createUrl(commandUrl, taskName, displayText, settings)
     runCommand(url, dispatch)
 }
 

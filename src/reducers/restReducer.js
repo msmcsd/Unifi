@@ -14,6 +14,8 @@ export const restReducer = (state, action) => {
             return {...state, cylancedesktopfolder: action.payload};
         case ReducerAction.Report:
             return JSON.parse(action.payload);
+        case ReducerAction.ClearReport:
+            return [];
         default:
     }
 

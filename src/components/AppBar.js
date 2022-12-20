@@ -41,7 +41,7 @@ function AppBar() {
   useEffect(() => {
     const fetchTasks = async () => {
       const data = await fetchAllTasks();
-      console.log("Fetch all tasks in App.js");
+      // console.log("Fetch all tasks in App.js");
       
       setTasks(data.filter(t => t.commandGroup === CommandGroup.Dos));
       setInstallTasks(data.filter(t => t.commandGroup === CommandGroup.Install));

@@ -4,7 +4,8 @@ const ReducerAction = {
   UpdateConfig: "UPDATE_CONFIG",                // Update config selection change on UI
   UpdateDebug: "UPDATE_DEBUG",                  // Update Debug change on UI
   UpdateInstallFolder: "UPDATE_INSTALL_FOLDER", // Update Install Folder change on UI
-  Report: "REPORT"
+  Report: "REPORT",
+  ClearReport: "CLEAR_REPORT"
 }
 
 export default ReducerAction;

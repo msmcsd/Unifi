@@ -72,7 +72,7 @@ const columns = [
 const ReportList = () => {
   const { reports } = useContext(CommandsContext, []);
 
-  console.log(reports)
+  // console.log("reports", reports)
 
   return (
     <Box sx={{

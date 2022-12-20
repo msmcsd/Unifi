@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { CommandsContext } from '../contexts/CommandsContext';
-import { runDosCommand } from '../data/webCommands';
+import { runRestCommand } from '../data/webCommands';
 import { Avatar } from '@mui/material';
 
 export default function SwipeableTemporaryDrawer({task}) {
@@ -31,7 +31,7 @@ export default function SwipeableTemporaryDrawer({task}) {
   };
 
   const handleClick = (displayText) => {
-    runDosCommand(task.name, displayText, JSON.stringify(uiSettings), dispatch)
+    runRestCommand(URL.RUN_COMMAND, task.name, displayText, JSON.stringify(uiSettings), dispatch)
   }
 
   const list = () => (

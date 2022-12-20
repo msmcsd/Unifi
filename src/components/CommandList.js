@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import { Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
-import { runDosCommand, runDownloadCommand, runDisplayCommand, runDisplayTask, runInstallCommand, runReportCommand } from '../data/webCommands';
+import { runRestCommand } from '../data/webCommands';
 import { CommandsContext } from '../contexts/CommandsContext';
 import CommandListType from '../constants/CommandListType';
 import InstallerType from '../constants/InstallerType';
 import SupportDoubleClick from './SupportDoubleClick';
+import ReducerAction from '../constants/ReducerAction';
+import URL from '../constants/Url';
 
 function CommandList({name, variant, list}) {
     const { uiSettings, dispatch, dispatchReports } = useContext(CommandsContext);
@@ -29,31 +31,37 @@ function CommandList({name, variant, list}) {
             case 0:
                 if (variant === CommandListType.Dos) {
                     console.log('Left single click on Dos command')
-                    if (displayText === "Show Installed Report")
-                        runReportCommand(taskName, displayText, JSON.stringify(uiSettings), dispatchReports)
-                    else
-                        runDosCommand(taskName, displayText, JSON.stringify(uiSettings), dispatch)
+                    switch (displayText.toLowerCase()) {
+                        case "show installed report":
+                        case "show uninstalled report":
+                            runRestCommand(URL.REPORT_COMMAND, taskName, displayText, JSON.stringify(uiSettings), dispatchReports)
+                            break;
+                        case "clear report":
+                            console.log("click clear report")
+                            // dispatchReports(ReducerAction.ClearReport)
+                            break;
+                        default:
+                            runRestCommand(URL.RUN_COMMAND, taskName, displayText, JSON.stringify(uiSettings), dispatch)    
+                    }
                 }
                 break;
             case 1:
                 if (variant === CommandListType.Download) {
                     console.log('Middle single click on Download command')
-                    runDownloadCommand(taskName, displayText, InstallerType.Bootstrapper , dispatch)
+                    runRestCommand(URL.DOWNLOAD_COMMAND, taskName, displayText, {installerType: `${InstallerType.Bootstrapper}`}, dispatch)
                 }
                 break;
             case 2:
                 if (variant === CommandListType.Install)
-                    runDisplayTask(displayText, JSON.stringify(uiSettings), dispatch)
+                    runRestCommand(URL.DISPLAY_TASK, displayText, null, JSON.stringify(uiSettings), dispatch)
                 else
-                    runDisplayCommand(taskName, displayText, JSON.stringify(uiSettings), dispatch)
+                    runRestCommand(URL.DISPLAY_COMMAND, taskName, displayText, JSON.stringify(uiSettings), dispatch)
                 
-                    console.log('Right single click')
+                console.log('Right single click')
                 e.preventDefault();
                 break;
             default: return;
         }
-
-
     }
 
     // This event handler is for downloading installers only
@@ -66,13 +74,13 @@ function CommandList({name, variant, list}) {
         switch (e.button) {
             case 0:
                 if (variant === CommandListType.Install)
-                    runInstallCommand(displayText, JSON.stringify(uiSettings), dispatch)
+                    runRestCommand(URL.INSTALL_COMMAND, displayText, null, JSON.stringify(uiSettings), dispatch)
                 else
-                    runDownloadCommand(taskName, displayText, InstallerType.Msi , dispatch)
+                    runRestCommand(URL.DOWNLOAD_COMMAND, taskName, displayText, {installerType: `${InstallerType.Msi}`}, dispatch)
                 console.log('left double click')
                 break;
             case 2:
-                runDownloadCommand(taskName, displayText, InstallerType.CyUpgrade , dispatch)
+                runRestCommand(URL.DOWNLOAD_COMMAND, taskName, displayText, {installerType: `${InstallerType.CyUpgrade}`}, dispatch)
                 console.log('right double click')
                 e.preventDefault();
                 break;
