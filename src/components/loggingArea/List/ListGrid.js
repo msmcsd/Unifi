@@ -48,7 +48,7 @@ const ListGrid = () => {
               primary={log.log} 
               sx={{height: 10}} 
               primaryTypographyProps={{fontSize: 12, color: `${getLogColor(log)}`, style: { whiteSpace: "normal" }}} /> */}
-            <Typography sx={{fontSize: 12, color: `${getLogColor(log)}`}}>{log.log}</Typography>
+            <Typography sx={{fontSize: 12, fontFamily: "Consolas", color: `${getLogColor(log)}`}}>{log.log}</Typography>
           </ListItem>
         ))}
         <ListItem ref={scrollRef} />
