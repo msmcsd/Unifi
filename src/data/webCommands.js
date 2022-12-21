@@ -52,8 +52,8 @@ const createUrl = (commandUrl, taskName, displayText, uiSettings) => {
 }
 
 export const runRestCommand = async (commandUrl, taskName, displayText, settings, dispatch) => {
-    console.log("command url", commandUrl)
     const url = createUrl(commandUrl, taskName, displayText, settings)
+    console.log("command url", url)
     runCommand(url, dispatch)
 }
 
