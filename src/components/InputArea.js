@@ -5,7 +5,7 @@ import { CommandsContext } from "../contexts/CommandsContext";
 
 const configs = ["r01", "r02", "qa2"]
 
-const InputArea = () => {
+const InputArea = ({ variables }) => {
   // const [installFolder, setInstallFolder] = useState(defaultSettings.installFolder)
   // const [config, setConfig] = useState(defaultSettings.config)
 
@@ -28,7 +28,9 @@ const InputArea = () => {
   const handleConfigChange = (e) => {
     // setConfig(e.target.value)
     // console.log(e.target.value)
-      dispatchUISettings({ type: ReducerAction.UpdateConfig, payload: e.target.value})
+    const token = variables.find(v => v.variable === e.target.value.toUpperCase() + "Token").value
+    console.log("token=", token)
+    dispatchUISettings({ type: ReducerAction.UpdateConfig, payload: { config: e.target.value, token: `${token}` } })
   }
 
   return (
@@ -53,7 +55,7 @@ const InputArea = () => {
             onChange={e=>handleConfigChange(e)}
           >
             {
-                configs.map(c => <FormControlLabel key={c} value={c} control={<Radio size="small" />} label={<Box fontSize={12}>{c}</Box>} />)
+                configs.map(c => <FormControlLabel key={c} value={c} control={<Radio size="small" />} label={<Box fontSize={12}>{c.toLowerCase()}</Box>} />)
             }
           </RadioGroup>
         </FormControl>

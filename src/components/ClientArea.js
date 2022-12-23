@@ -7,7 +7,7 @@ import CommandListType from "../constants/CommandListType";
 import BatchCommandList from "./BatchCommandList";
 import ReportList from "./ReportList";
 
-const ClientArea = ({ dosTasks, installTasks, downloadTask, batchTasks }) => {
+const ClientArea = ({ dosTasks, installTasks, downloadTask, batchTasks, variables }) => {
 
   return (
     <Grid // Main grid that covers the whole client area. There are 3 columnds.
@@ -18,7 +18,7 @@ const ClientArea = ({ dosTasks, installTasks, downloadTask, batchTasks }) => {
       <Grid item xs={1} md={2}  // Column 1: displays install and download commands
       >
         <Grid container direction="column">
-          <InputArea />
+          <InputArea variables={variables} />
           <CommandList name="Install" list={installTasks} variant={CommandListType.Install} />
           <CommandList key={downloadTask.name} name={downloadTask.name} list={downloadTask.commands} variant={CommandListType.Download} />
         </Grid>
