@@ -6,3 +6,14 @@ export const UISettings = {
 };
 
 export const Logs = []
+
+export const defaultTask = {
+    "name": "",
+    "commandGroup": 1,
+    "commands": [
+      {
+        "displayText": "",
+        "type": 0
+      }
+    ]
+}

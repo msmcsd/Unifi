@@ -20,16 +20,9 @@ import ClientArea from './ClientArea'
 import SwipeableTemporaryDrawer from './SwipeableTemporaryDrawer';
 import { fetchAllTasks } from '../data/webCommands';
 import CommandGroup from '../constants/CommandGroup';
+import { defaultTask } from '../initialstates/InitialState';
 
 const drawerWidth = 0;
-
-const defaultTask = {
-    "name": "",
-    "commandGroup": 1,
-    "commands": [
-      { "displayText": "" }
-    ]
-}
 
 function AppBar() {
   const [dosTasks, setTasks] = useState([defaultTask])

@@ -8,6 +8,7 @@ import InstallerType from '../constants/InstallerType';
 import SupportDoubleClick from './SupportDoubleClick';
 import ReducerAction from '../constants/ReducerAction';
 import URL from '../constants/Url';
+import CommandType from '../constants/CommandType';
 
 function CommandList({name, variant, list}) {
     const { uiSettings, dispatch, dispatchReports } = useContext(CommandsContext);
@@ -97,7 +98,7 @@ function CommandList({name, variant, list}) {
                         onContextMenu={(e) => e.preventDefault()}
                         onMouseUp={handleClick}
                     >
-                        <ListItemText primaryTypographyProps={{fontSize: '12px'}} primary={getDisplayText(c)} />
+                        <ListItemText primaryTypographyProps={{ fontSize: '12px' }} primary={getDisplayText(c)} style={{color: `${getTextColor(c)}`}} />
                     </ListItemButton>
                 </ListItem>
             )
@@ -105,6 +106,13 @@ function CommandList({name, variant, list}) {
     }
 
     const getDisplayText = (c) => variant === CommandListType.Install ? c.name : c.displayText
+
+    const getTextColor = (c) => {
+        if (variant === CommandListType.Dos && c.type === CommandType.Code)
+            return "#4caf50" // Green
+        
+        return "black"
+    }
 
     return (
         <Box sx={{
