@@ -11,12 +11,14 @@ import URL from '../constants/Url';
 import CommandType from '../constants/CommandType';
 
 function CommandList({name, variant, list}) {
-    const { uiSettings, dispatch, dispatchReports } = useContext(CommandsContext);
+    const { uiSettings, reports, dispatch, dispatchReports } = useContext(CommandsContext);
 
     // console.log(task);
     // useEffect(() => {
     // console.log("Populating dos commands: ", task.name);
     // }, [task])
+
+    // console.log("Command list", reports)
 
     const handleClick = SupportDoubleClick({
         onDoubleClick: (e) => doubleClick(e),
@@ -39,7 +41,7 @@ function CommandList({name, variant, list}) {
                             break;
                         case "clear report":
                             console.log("click clear report")
-                            // dispatchReports(ReducerAction.ClearReport)
+                            dispatchReports({ type: ReducerAction.ClearReport })
                             break;
                         default:
                             runRestCommand(URL.RUN_COMMAND, taskName, displayText, JSON.stringify(uiSettings), dispatch)    
@@ -98,7 +100,10 @@ function CommandList({name, variant, list}) {
                         onContextMenu={(e) => e.preventDefault()}
                         onMouseUp={handleClick}
                     >
-                        <ListItemText primaryTypographyProps={{ fontSize: '12px' }} primary={getDisplayText(c)} style={{color: `${getTextColor(c)}`}} />
+                        <ListItemText
+                            primaryTypographyProps={{ fontSize: '12px' }}
+                            primary={getDisplayText(c)}
+                            style={{ color: `${getTextColor(c)}`, backgroundColor: `${getBackgroudColor(c)}` }} />
                     </ListItemButton>
                 </ListItem>
             )
@@ -112,6 +117,22 @@ function CommandList({name, variant, list}) {
             return "#4caf50" // Green
         
         return "black"
+    }
+
+    const getBackgroudColor = (c) => {
+        if (reports && variant === CommandListType.Dos) {
+            const reportItem = reports.find(i => i.category === name && i.test === c.displayText)
+            if (reportItem) {
+                if (reportItem.passed) {
+                    return "#4caf50" // Green
+                }
+                else {
+                    return "#ff784e" // Red
+                }
+            }
+        }
+
+        return ""
     }
 
     return (

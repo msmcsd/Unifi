@@ -50,8 +50,8 @@ const ClientArea = ({ dosTasks, installTasks, downloadTask, batchTasks, variable
           </Grid>
         </Grid>
         <Grid container direction="row">
-          <Grid item xs={4}><BatchCommandList tasks={batchTasks} /></Grid>
-          <Grid item xs={8}><ReportList/></Grid>
+          <Grid item xs={6}><BatchCommandList tasks={batchTasks} /></Grid>
+          {/* <Grid item xs={8}><ReportList/></Grid> */}
         </Grid>
       </Grid>
     </Grid>
