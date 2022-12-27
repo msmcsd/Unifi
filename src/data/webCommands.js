@@ -74,7 +74,7 @@ const runCommand = async (url, dispatch) => {
     
     // Register socket event for report results
     socket.on(SocketEvent.Report, data => {
-        // console.log("--------", data)
+        // console.log("Report--------", data)
         dispatch({ type: ReducerAction.Report, payload: data })
     })
 

@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { useContext, useState } from 'react';
+import { Alert, Divider, List, ListItem, ListItemButton, ListItemText, Snackbar } from '@mui/material';
 import { Box } from '@mui/system';
 import { runRestCommand } from '../data/webCommands';
 import { CommandsContext } from '../contexts/CommandsContext';
@@ -9,6 +9,7 @@ import SupportDoubleClick from './SupportDoubleClick';
 import ReducerAction from '../constants/ReducerAction';
 import URL from '../constants/Url';
 import CommandType from '../constants/CommandType';
+import MuiAlert from '@mui/material/Alert';
 
 function CommandList({name, variant, list}) {
     const { uiSettings, reports, dispatch, dispatchReports } = useContext(CommandsContext);
@@ -37,6 +38,7 @@ function CommandList({name, variant, list}) {
                     switch (displayText.toLowerCase()) {
                         case "show installed report":
                         case "show uninstalled report":
+                            setOpen(true)
                             runRestCommand(URL.REPORT_COMMAND, taskName, displayText, JSON.stringify(uiSettings), dispatchReports)
                             break;
                         case "clear report":
@@ -135,6 +137,15 @@ function CommandList({name, variant, list}) {
         return ""
     }
 
+    const [open, setOpen] = useState(false)
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+
+        setOpen(false);
+    };
+    
     return (
         <Box sx={{
             m: 1,
@@ -143,8 +154,26 @@ function CommandList({name, variant, list}) {
             bgcolor: 'white',
             border: '1px solid grey',
             fontSize: '14px'
-        }}>{ name }
-            <Divider/>
+        }}>{name}
+            <Divider />
+            <Snackbar
+                open={open}
+                autoHideDuration={3000}
+                onClose={handleClose}
+                ContentProps={{ sx: {background: "green"} }}
+                message="Report is being generated..."
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+                {/* <MuiAlert
+                    onClose={handleClose}
+                    severity="info"
+                    elevation={6}
+                    variant="filled"
+                    color="success"
+                    sx={{ width: '100%' }}>
+                    Report is being generated...
+                </MuiAlert> */}
+            </Snackbar>
             <List disablePadding dense={true}>
                 {populateList()}
             </List>
