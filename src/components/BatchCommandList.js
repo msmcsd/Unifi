@@ -1,5 +1,6 @@
-import { Button, Divider, FormControl, InputLabel, List, ListItem, ListItemButton, ListItemText, MenuItem, Select } from '@mui/material';
+import { Button, Divider, FormControl, Grid, InputLabel, List, ListItem, ListItemButton, ListItemText, MenuItem, Select } from '@mui/material';
 import { Box } from '@mui/system';
+import { calculateNewValue } from '@testing-library/user-event/dist/utils';
 import { useState } from 'react';
 
 const BatchCommandList = ({ tasks }) => {
@@ -44,22 +45,30 @@ const BatchCommandList = ({ tasks }) => {
       border: '1px solid grey',
       fontSize: '14px',
       flex: "column"
-    }}>
-      {/* <Divider /> */}
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label" sx={{mt: 1}}>Batch Commands</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectedTask}
-          // label="Age"
-          onChange={e => handleChange(e)}
-          sx={{ mt: 2, height: 36 }}
-        >
-        {populateTasks()}
-        </Select>
-        <Button variant="contained" >Run</Button>
-      </FormControl>
+    }}>Batch Commands
+      <Divider />
+      {/* <FormControl fullWidth> */}
+        {/* <InputLabel id="demo-simple-select-label" sx={{mt: 1}}>Batch Commands</InputLabel> */}
+      <Grid container sx={{mt: 1}} >
+        <Grid item xs={8}>
+          <FormControl fullWidth>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedTask}
+                // label="Age"
+                onChange={e => handleChange(e)}
+                sx={{ mt: 0, height: 36 }}
+              >
+              {populateTasks()}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={4}>
+          <Button variant="contained" >Run</Button>
+          </Grid>
+        </Grid>  
+      {/* </FormControl> */}
       <Divider sx={{mt: 1}} />
       <List disablePadding dense={true} sx={{mt: 1}}>
         {populateCommands()}
