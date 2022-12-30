@@ -10,6 +10,7 @@ import ReducerAction from '../constants/ReducerAction';
 import URL from '../constants/Url';
 import CommandType from '../constants/CommandType';
 import MuiAlert from '@mui/material/Alert';
+import ListHeader from './ListHeader';
 
 function CommandList({name, variant, list}) {
     const { uiSettings, reports, dispatch, dispatchReports } = useContext(CommandsContext);
@@ -156,14 +157,7 @@ function CommandList({name, variant, list}) {
             borderRadius: 1,
             border: '1px solid grey',
         }}>
-            <Box
-                sx={{
-                    m: 0,
-                    bgcolor: `${theme.typography.listTitle.backgroundColor}`,
-                    fontSize: `${theme.typography.listTitle.fontSize}`
-                }}
-            >{name}
-            </Box>
+            <ListHeader name={name} />
             <Divider sx={{mb: 1}} />
             <Snackbar
                 open={open}

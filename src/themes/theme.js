@@ -2,8 +2,22 @@
 export const lightTheme = {
   palette: {
     primary: {
-      main: "rgba(0, 0, 255, 0.87)",
+      main: "rgba(81, 169, 245, 0.87)",
     },
+  },
+  components: {
+    MuiBox: {
+      variants: [
+        {
+          props: { variant: 'list' },
+          sx: {
+            m: 1,
+            borderRadius: 1,
+            border: '1px solid grey'
+          }
+        }
+      ]
+    }
   },
   typography: {
     logging: {
@@ -12,7 +26,7 @@ export const lightTheme = {
     },
     listTitle: {
       fontSize: "0.85rem",
-      backgroundColor: "rgba(255, 255, 255, 0.87)",
+      backgroundColor: "rgba(245, 201, 105, 0.87)",
     },
     listItem: {
       fontSize: "0.75rem",

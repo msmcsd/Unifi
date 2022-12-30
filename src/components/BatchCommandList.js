@@ -1,6 +1,7 @@
 import { Button, Divider, FormControl, Grid, InputLabel, List, ListItem, ListItemButton, ListItemText, MenuItem, Select, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from 'react';
+import ListHeader from './ListHeader';
 
 const BatchCommandList = ({ tasks }) => {
   const [selectedTask, setSelectedTask] = useState(tasks[0].name)
@@ -41,11 +42,10 @@ const BatchCommandList = ({ tasks }) => {
       //width: 220,
       height: 250,
       borderRadius: 1,
-      bgcolor: `${theme.typography.listTitle.backgroundColor}`,
       border: '1px solid grey',
-      fontSize: `${theme.typography.listTitle.fontSize}`,
       flex: "column"
-    }}>Batch Commands
+    }}>
+      <ListHeader name="Batch Commands" />
       <Divider />
       {/* <FormControl fullWidth> */}
         {/* <InputLabel id="demo-simple-select-label" sx={{mt: 1}}>Batch Commands</InputLabel> */}

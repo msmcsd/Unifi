@@ -27,7 +27,6 @@ const ListGrid = () => {
     }
   }
 
-  console.log("theme.typography.logging.fontSize", theme.typography.logging.fontSize)
   return (
     <Box sx={{
           m: 1,

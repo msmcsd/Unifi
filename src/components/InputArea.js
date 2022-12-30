@@ -2,6 +2,7 @@ import { Box, Checkbox, Divider, FormControl, FormControlLabel, FormLabel, Radio
 import { useContext, useState } from "react";
 import ReducerAction from "../constants/ReducerAction";
 import { CommandsContext } from "../contexts/CommandsContext";
+import ListHeader from "./ListHeader";
 
 const configs = ["r01", "r02", "qa2"]
 
@@ -39,12 +40,11 @@ const InputArea = ({ variables }) => {
             m: 1,
             // width: 220,
             borderRadius: 1,
-            bgcolor: `${theme.typography.listTitle.backgroundColor}`,
             border: '1px solid grey',
-            fontSize: `${theme.typography.listTitle.fontSize}`
         }}
         flex="column"
-    >Config
+    >
+      <ListHeader name="Config" />
       <Divider />
       <Box display="flex" sx={{ml: 2}}>
         <FormControl>
