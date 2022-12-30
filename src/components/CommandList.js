@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Alert, Divider, List, ListItem, ListItemButton, ListItemText, Snackbar } from '@mui/material';
+import { Alert, Divider, List, ListItem, ListItemButton, ListItemText, Snackbar, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { runRestCommand } from '../data/webCommands';
 import { CommandsContext } from '../contexts/CommandsContext';
@@ -13,6 +13,7 @@ import MuiAlert from '@mui/material/Alert';
 
 function CommandList({name, variant, list}) {
     const { uiSettings, reports, dispatch, dispatchReports } = useContext(CommandsContext);
+    const theme = useTheme();
 
     // console.log(task);
     // useEffect(() => {
@@ -96,16 +97,19 @@ function CommandList({name, variant, list}) {
     const populateList = () => {
         return (
             list.map(c =>
-                <ListItem disablePadding key={getDisplayText(c)} >
+                <ListItem
+                    disablePadding
+                    key={getDisplayText(c)} >
                     <ListItemButton
-                        sx={{ height: 16 }}
+                        sx={{ height: 16}}
                         onContextMenu={(e) => e.preventDefault()}
                         onMouseUp={handleClick}
                     >
                         <ListItemText
-                            primaryTypographyProps={{ fontSize: '12px' }}
+                            primaryTypographyProps={{ fontSize: `${theme.typography.listItem.fontSize}` }}
                             primary={getDisplayText(c)}
-                            style={{ color: `${getTextColor(c)}`, backgroundColor: `${getBackgroudColor(c)}` }} />
+                            style={{ color: `${getTextColor(c)}`, backgroundColor: `${getBackgroudColor(c)}` }}
+                        />
                     </ListItemButton>
                 </ListItem>
             )
@@ -116,7 +120,7 @@ function CommandList({name, variant, list}) {
 
     const getTextColor = (c) => {
         if (variant === CommandListType.Dos && c.type === CommandType.Code)
-            return "#4caf50" // Green
+            return theme.typography.listItem.backgroundColorCodeCommand // Green
         
         return "black"
     }
@@ -126,10 +130,10 @@ function CommandList({name, variant, list}) {
             const reportItem = reports.find(i => i.category === name && i.test === c.displayText)
             if (reportItem) {
                 if (reportItem.passed) {
-                    return "#4caf50" // Green
+                    return theme.typography.listItem.backgroundColorSuccessReport
                 }
                 else {
-                    return "#ff784e" // Red
+                    return theme.typography.listItem.backgroundColorFailedReport
                 }
             }
         }
@@ -149,13 +153,18 @@ function CommandList({name, variant, list}) {
     return (
         <Box sx={{
             m: 1,
-            // width: 220,
             borderRadius: 1,
-            bgcolor: 'white',
             border: '1px solid grey',
-            fontSize: '14px'
-        }}>{name}
-            <Divider />
+        }}>
+            <Box
+                sx={{
+                    m: 0,
+                    bgcolor: `${theme.typography.listTitle.backgroundColor}`,
+                    fontSize: `${theme.typography.listTitle.fontSize}`
+                }}
+            >{name}
+            </Box>
+            <Divider sx={{mb: 1}} />
             <Snackbar
                 open={open}
                 autoHideDuration={3000}
@@ -174,7 +183,7 @@ function CommandList({name, variant, list}) {
                     Report is being generated...
                 </MuiAlert> */}
             </Snackbar>
-            <List disablePadding dense={true}>
+            <List disablePadding dense={true} sx={{mb: 1}}>
                 {populateList()}
             </List>
         </Box>

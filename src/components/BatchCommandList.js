@@ -1,11 +1,11 @@
-import { Button, Divider, FormControl, Grid, InputLabel, List, ListItem, ListItemButton, ListItemText, MenuItem, Select } from '@mui/material';
+import { Button, Divider, FormControl, Grid, InputLabel, List, ListItem, ListItemButton, ListItemText, MenuItem, Select, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
-import { calculateNewValue } from '@testing-library/user-event/dist/utils';
 import { useState } from 'react';
 
 const BatchCommandList = ({ tasks }) => {
   const [selectedTask, setSelectedTask] = useState(tasks[0].name)
   const [commands, setCommands] = useState(tasks[0].commands)
+  const theme = useTheme()
   
   const handleChange = (e) => {
     const task = tasks.find(t => t.name === e.target.value)
@@ -41,9 +41,9 @@ const BatchCommandList = ({ tasks }) => {
       //width: 220,
       height: 250,
       borderRadius: 1,
-      bgcolor: 'white',
+      bgcolor: `${theme.typography.listTitle.backgroundColor}`,
       border: '1px solid grey',
-      fontSize: '14px',
+      fontSize: `${theme.typography.listTitle.fontSize}`,
       flex: "column"
     }}>Batch Commands
       <Divider />
@@ -65,7 +65,7 @@ const BatchCommandList = ({ tasks }) => {
           </FormControl>
         </Grid>
         <Grid item xs={4}>
-          <Button variant="contained" >Run</Button>
+          <Button variant="contained" color="primary" >Run</Button>
           </Grid>
         </Grid>  
       {/* </FormControl> */}

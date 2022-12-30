@@ -1,4 +1,4 @@
-import { Box, Checkbox, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { Box, Checkbox, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography, useTheme } from "@mui/material";
 import { useContext, useState } from "react";
 import ReducerAction from "../constants/ReducerAction";
 import { CommandsContext } from "../contexts/CommandsContext";
@@ -8,6 +8,7 @@ const configs = ["r01", "r02", "qa2"]
 const InputArea = ({ variables }) => {
   // const [installFolder, setInstallFolder] = useState(defaultSettings.installFolder)
   // const [config, setConfig] = useState(defaultSettings.config)
+  const theme = useTheme();
 
   const { uiSettings, dispatchUISettings } = useContext(CommandsContext);
   // console.log(uiSettings)
@@ -38,9 +39,9 @@ const InputArea = ({ variables }) => {
             m: 1,
             // width: 220,
             borderRadius: 1,
-            bgcolor: 'white',
+            bgcolor: `${theme.typography.listTitle.backgroundColor}`,
             border: '1px solid grey',
-            fontSize: '14px'
+            fontSize: `${theme.typography.listTitle.fontSize}`
         }}
         flex="column"
     >Config

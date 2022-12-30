@@ -1,5 +1,6 @@
 import { Box, List, ListItem, ListItemText, Typography } from "@mui/material"
 import { useContext, useEffect, useRef } from "react"
+import { useTheme } from "@mui/material/styles"
 import ReducerAction from "../../../constants/ReducerAction"
 import SocketEvent from "../../../constants/SocketEvent"
 import { CommandsContext } from "../../../contexts/CommandsContext"
@@ -7,6 +8,7 @@ import { CommandsContext } from "../../../contexts/CommandsContext"
 const ListGrid = () => {
   const { logs, dispatch } = useContext(CommandsContext)
   const scrollRef = useRef(null);
+  const theme = useTheme();
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -25,6 +27,7 @@ const ListGrid = () => {
     }
   }
 
+  console.log("theme.typography.logging.fontSize", theme.typography.logging.fontSize)
   return (
     <Box sx={{
           m: 1,
@@ -48,7 +51,15 @@ const ListGrid = () => {
               primary={log.log} 
               sx={{height: 10}} 
               primaryTypographyProps={{fontSize: 12, color: `${getLogColor(log)}`, style: { whiteSpace: "normal" }}} /> */}
-            <Typography sx={{fontSize: 12, fontFamily: "Consolas", color: `${getLogColor(log)}`}}>{log.log}</Typography>
+            <Typography
+              sx={{
+                fontSize: `${theme.typography.logging.fontSize}`,
+                fontFamily: `${theme.typography.logging.fontFamily}`,
+                color: `${getLogColor(log)}`
+              }}
+            >
+              {log.log}
+            </Typography>
           </ListItem>
         ))}
         <ListItem ref={scrollRef} />
