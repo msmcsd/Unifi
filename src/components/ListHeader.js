@@ -6,11 +6,13 @@ const ListHeader = ({ name }) => {
   return (
     <Box
       sx={{
-          m: 0,
-          bgcolor: `${theme.typography.listTitle.backgroundColor}`,
-          fontSize: `${theme.typography.listTitle.fontSize}`
+        m: 0,
+        bgcolor: `${theme.typography.listTitle.backgroundColor}`,
+        fontSize: `${theme.typography.listTitle.fontSize}`,
+        height: 25,
+        textAlign: "center"
       }}
-      >{name}
+    >{name}
     </Box>
   )
 }
