@@ -7,11 +7,14 @@ import ListHeader from "./ListHeader";
 const configs = ["r01", "r02", "qa2"]
 
 const InputArea = ({ variables }) => {
-  // const [installFolder, setInstallFolder] = useState(defaultSettings.installFolder)
-  // const [config, setConfig] = useState(defaultSettings.config)
+  const {
+		state: { uiSettings },
+		dispatch,
+	} = useContext(CommandsContext);
+
+  const [config, setConfig] = useState(uiSettings.getconfig);
   const theme = useTheme();
 
-  const { uiSettings, dispatchUISettings } = useContext(CommandsContext);
   // console.log(uiSettings)
 
   const [isDebug, setIsDebug] = useState(uiSettings.compilemode === "Debug")
@@ -19,20 +22,30 @@ const InputArea = ({ variables }) => {
   const handleInstallFolderChange = (e) => {
     //setInstallFolder(e.target.value)
     // console.log(e.target.value)
-    dispatchUISettings({ type: ReducerAction.UpdateInstallFolder, payload: e.target.value})
+    dispatch({
+			type: ReducerAction.UpdateInstallFolder,
+			payload: e.target.value,
+		});
   }
 
   const handleIsDebugChange = (e) => {
     setIsDebug(e.target.checked)
-    dispatchUISettings({ type: ReducerAction.UpdateDebug, debug: e.target.checked? "Debug" : ""})
+    dispatch({
+			type: ReducerAction.UpdateDebug,
+			debug: e.target.checked ? "Debug" : "",
+		});
   }
 
   const handleConfigChange = (e) => {
     // setConfig(e.target.value)
-    // console.log(e.target.value)
+    // console.log("e.target.value", e.target.value)
     const token = variables.find(v => v.variable === e.target.value.toUpperCase() + "Token").value
-    console.log("token=", token)
-    dispatchUISettings({ type: ReducerAction.UpdateConfig, payload: { config: e.target.value, token: `${token}` } })
+    // console.log("token=", token)
+    dispatch({
+			type: ReducerAction.UpdateConfig,
+			payload: { config: e.target.value, token: `${token}` },
+    });
+    // setConfig(e.target.value)
   }
 
   return (
@@ -51,7 +64,7 @@ const InputArea = ({ variables }) => {
           <RadioGroup
             row
             aria-labelledby="demo-radio-buttons-group-label"
-            value={uiSettings.getconfig}
+            value={config}
             name="radio-buttons-group"
             onChange={e=>handleConfigChange(e)}
           >

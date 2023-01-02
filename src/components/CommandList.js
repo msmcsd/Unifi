@@ -10,7 +10,6 @@ import {
 	Typography,
 	useTheme,
 } from "@mui/material";
-import { Box } from "@mui/system";
 import { runRestCommand } from "../data/webCommands";
 import { CommandsContext } from "../contexts/CommandsContext";
 import CommandListType from "../constants/CommandListType";
@@ -24,8 +23,7 @@ import ListHeader from "./ListHeader";
 import BaseBox from "./BaseBox";
 
 function CommandList({ name, variant, list }) {
-	const { uiSettings, reports, dispatch, dispatchReports } =
-		useContext(CommandsContext);
+  const { state: { uiSettings, reports }, dispatch } =useContext(CommandsContext);
 	const theme = useTheme();
 
 	// console.log(task);
@@ -58,12 +56,12 @@ function CommandList({ name, variant, list }) {
 								taskName,
 								displayText,
 								JSON.stringify(uiSettings),
-								dispatchReports
+								dispatch
 							);
 							break;
 						case "clear report":
 							console.log("click clear report");
-							dispatchReports({ type: ReducerAction.ClearReport });
+							dispatch({ type: ReducerAction.ClearReport });
 							break;
 						default:
 							runRestCommand(

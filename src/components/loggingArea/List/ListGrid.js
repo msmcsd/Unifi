@@ -6,7 +6,7 @@ import SocketEvent from "../../../constants/SocketEvent"
 import { CommandsContext } from "../../../contexts/CommandsContext"
 
 const ListGrid = () => {
-  const { logs, dispatch } = useContext(CommandsContext)
+  const { state: { logs }, dispatch } = useContext(CommandsContext)
   const scrollRef = useRef(null);
   const theme = useTheme();
 
