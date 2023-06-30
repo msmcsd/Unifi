@@ -8,6 +8,12 @@ const initialState = {
 		compilemode: "",
 		cylancedesktopfolder: "C:\\Program Files\\123",
 		gettoken: "DSDDE1OVnh1KK7k6D0Ibgm8U",
+		product: "Protect",
+		installinstallertype: "MSI",
+		installas: "Admin",
+		installmode: "Quiet",
+		jenkins: "Me",
+		downloadinstallertype: "MSI",
 	},
 	reports: [],
 };

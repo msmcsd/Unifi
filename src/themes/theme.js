@@ -19,6 +19,7 @@ export const lightTheme = {
 		},
 	},
 	typography: {
+		fontSize: 10,
 		logging: {
 			fontSize: "0.75rem",
 			fontFamily: "Consolas",
