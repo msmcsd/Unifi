@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import ReducerAction from "../../../constants/ReducerAction";
-import { CommandsContext } from "../../../contexts/CommandsContext";
-import { populateRadioButtonGroupWithBox } from "../../../shared/populateRadioGroup";
+import ReducerAction from "../../constants/ReducerAction";
+import { CommandsContext } from "../../contexts/CommandsContext";
+import { populateRadioButtonGroupWithBox } from "../../shared/populateRadioGroup";
 
 const installModes = ["Quiet", "With UI"];
 

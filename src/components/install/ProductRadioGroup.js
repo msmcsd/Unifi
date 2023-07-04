@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import ReducerAction from "../../../constants/ReducerAction";
-import { CommandsContext } from "../../../contexts/CommandsContext";
-import { populateRadioButtonGroupWithBox } from "../../../shared/populateRadioGroup";
+import ReducerAction from "../../constants/ReducerAction";
+import { populateRadioButtonGroupWithBox } from "../../shared/populateRadioGroup";
+import { CommandsContext } from "../../contexts/CommandsContext";
 
 const productNames = ["Protect", "Optics2", "Optics3"];
 

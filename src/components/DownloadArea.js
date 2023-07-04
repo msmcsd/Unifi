@@ -1,4 +1,5 @@
 import {
+	Divider,
 	FormControl,
 	FormControlLabel,
 	Radio,
@@ -10,6 +11,8 @@ import HorizontalDivider from "./shared/HorizontalDivider";
 import ListHeader from "./ListHeader";
 import JenkinsRadioGroup from "./download/JenkinsRadioGroup";
 import DownloadInstallerRadioGroup from "./download/DownloadInstallerRadioGroup";
+import BuildRadioGroup from "./download/BuildRadioGroup";
+import DownloadButtonGroup from "./download/DownloadButtonGroup";
 
 const installerTypes = ["MSI", "Bootstrapper", "Upgrade"];
 
@@ -61,9 +64,11 @@ const DownloadArea = () => {
 			<HorizontalDivider text="Jenkins" />
 			<JenkinsRadioGroup />
 			<HorizontalDivider text="Build" />
-			{populateBuildTypes()}
+			<BuildRadioGroup />
 			<HorizontalDivider text="Installer" />
 			<DownloadInstallerRadioGroup />
+			<Divider />
+			<DownloadButtonGroup />
 		</Box>
 	);
 };

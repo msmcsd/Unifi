@@ -14,6 +14,7 @@ const initialState = {
 		installmode: "Quiet",
 		jenkins: "Me",
 		downloadinstallertype: "MSI",
+		buildtype: "Latest",
 	},
 	reports: [],
 };

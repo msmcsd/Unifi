@@ -4,8 +4,8 @@ import { Box } from "@mui/system";
 const RadioButton = ({ text }) => {
 	return (
 		<FormControlLabel
-			key="Me"
-			value="Me"
+			key={text}
+			value={text}
 			control={
 				<Radio
 					sx={{

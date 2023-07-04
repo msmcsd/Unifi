@@ -12,6 +12,7 @@ const ReducerAction = {
 	UpdateInstallMode: "UPDATE_INSTALL_MODE",
 	UpdateJenkins: "UPDATE_JENKINS",
 	UpdateDownloadInstallerType: "UPDATE_DOWNLOAD_INSTALLER",
+	UpdateBuildType: "UPDATE_BUILD_TYPE",
 };
 
 export default ReducerAction;

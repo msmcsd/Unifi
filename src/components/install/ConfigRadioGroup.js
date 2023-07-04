@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import { CommandsContext } from "../../../contexts/CommandsContext";
-import { populateRadioButtonGroupWithBox } from "../../../shared/populateRadioGroup";
+import { CommandsContext } from "../../contexts/CommandsContext";
+import { populateRadioButtonGroupWithBox } from "../../shared/populateRadioGroup";
 
 const configs = ["r01", "r02", "qa2", "qa2N"];
 

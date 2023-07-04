@@ -11,11 +11,12 @@ import { CommandsContext } from "../contexts/CommandsContext";
 import HorizontalDivider from "./shared/HorizontalDivider";
 import ListHeader from "./ListHeader";
 
-import ConfigRadioGroup from "./radiogroups/install/ConfigRadioGroup";
-import ProductRadioGroup from "./radiogroups/install/ProductRadioGroup";
-import InstallerRadioGroup from "./radiogroups/install/InstallerRadioGroup";
-import InstallAsRadioGroup from "./radiogroups/install/InstallAsRadioGroup";
-import InstallModeRadioGroup from "./radiogroups/install/InstallModeRadioGroup";
+import ConfigRadioGroup from "./install/ConfigRadioGroup";
+import ProductRadioGroup from "./install/ProductRadioGroup";
+import InstallerRadioGroup from "./install/InstallerRadioGroup";
+import InstallAsRadioGroup from "./install/InstallAsRadioGroup";
+import InstallModeRadioGroup from "./install/InstallModeRadioGroup";
+import InstallButtonGroup from "./install/InstallButtonGroup";
 
 const InstallArea = ({ variables }) => {
 	const {
@@ -76,6 +77,7 @@ const InstallArea = ({ variables }) => {
 			<HorizontalDivider text="Mode" topPadding bottomPadding />
 			<InstallModeRadioGroup />
 			<Divider />
+			<InstallButtonGroup />
 		</Box>
 	);
 };

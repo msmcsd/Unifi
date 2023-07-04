@@ -13,13 +13,23 @@ const HorizontalDivider = ({ text, topPadding, bottomPadding }) => {
 	return (
 		<Divider
 			textAlign="left"
-			variant="middle"
+			// variant="middle"
 			sx={{
-				"&::before, &::after": {
+				"&::before": {
 					borderColor: "orange",
+					width: 0,
 				},
-				pt: `${topPad}`,
-				pb: `${bottomPad}`,
+				"&::after": {
+					borderColor: "orange",
+					// width: "70%"
+				},
+				"& .MuiDivider-wrapper": {
+					fontWeight: "bold",
+					// fontSize: 13
+				},
+				pt: 1,
+				// pt: `${topPad}`,
+				// pb: `${bottomPad}`,
 			}}
 		>
 			{text}

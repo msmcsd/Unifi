@@ -33,6 +33,8 @@ export const restReducer = (state, action) => {
 			return { ...state, uiSetting: { jenkins: action.payload } };
 		case ReducerAction.UpdateDownloadInstallerType:
 			return { ...state, uiSetting: { downloadinstallertype: action.payload } };
+		case ReducerAction.UpdateBuildType:
+			return { ...state, uiSetting: { buildtype: action.payload } };
 
 		// Report
 		case ReducerAction.Report:
