@@ -40,7 +40,7 @@ export const populateRadioButtonGroup = (
 				onChange={(e) => changeEventHanlder(e)}
 			>
 				{buttonList.map((c) => (
-					<RadioButton text={c} />
+					<RadioButton text={c} key={c} />
 				))}
 			</RadioGroup>
 		</>
