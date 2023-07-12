@@ -1,7 +1,6 @@
-const CommandType =
-{
-    Dos: 0,
-    Code: 1,
-}
+const CommandType = {
+	Dos: "Dos",
+	Code: "Code",
+};
 
 export default CommandType;

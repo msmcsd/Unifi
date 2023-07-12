@@ -25,9 +25,9 @@ import { defaultTask } from '../initialstates/InitialState';
 const drawerWidth = 0;
 
 function AppBar() {
-  const [dosTasks, setTasks] = useState([defaultTask])
-  const [installTasks, setInstallTasks] = useState([defaultTask])
-  const [downloadTask, setDownloadTask] = useState(defaultTask)
+  const [dosTasks, setDosTasks] = useState([defaultTask])
+  // const [installTasks, setInstallTasks] = useState([defaultTask])
+  // const [downloadTask, setDownloadTask] = useState(defaultTask)
   const [drawerTask, setDrawerTasks] = useState(defaultTask)
   const [batchTasks, setBatchTasks] = useState([defaultTask])
   const [variables, setVariables] = useState([])
@@ -37,13 +37,13 @@ function AppBar() {
       const data = await fetchAllTasks();
       // console.log("Fetch all tasks in App.js");
       
-      setTasks(data.filter(t => t.commandGroup === CommandGroup.Dos));
-      setInstallTasks(data.filter(t => t.commandGroup === CommandGroup.Install));
+      setDosTasks(data.filter(t => t.CommandGroup === CommandGroup.Dos));
+      // setInstallTasks(data.filter(t => t.commandGroup === CommandGroup.Install));
       // setDownloadTask(data.filter(t => t.commandGroup === CommandGroup.Download )[0]);
-      setDownloadTask(data.find(t => t.commandGroup === CommandGroup.Download ));
-      setDrawerTasks(data.find(t => t.commandGroup === CommandGroup.Taskbar ));
-      setBatchTasks(data.filter(t => t.commandGroup === CommandGroup.Batch ));
-      setVariables(data.find(t => t.commandGroup === CommandGroup.Variable ).commands);
+      // setDownloadTask(data.find(t => t.commandGroup === CommandGroup.Download ));
+      // setDrawerTasks(data.find(t => t.commandGroup === CommandGroup.Taskbar ));
+      setBatchTasks(data.filter(t => t.CommandGroup === CommandGroup.Batch ));
+      setVariables(data.find(t => t.CommandGroup === CommandGroup.Variable ).Commands);
     }
 
     fetchTasks();
@@ -71,7 +71,7 @@ function AppBar() {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <ClientArea dosTasks={dosTasks} installTasks={installTasks} downloadTask={downloadTask} batchTasks={batchTasks} variables={ variables } />
+        <ClientArea dosTasks={dosTasks} batchTasks={batchTasks} variables={ variables } />
       </Box>
     </Box>
   );

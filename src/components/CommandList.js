@@ -23,7 +23,7 @@ import ListHeader from "./ListHeader";
 import BaseBox from "./BaseBox";
 
 function CommandList({ name, variant, list }) {
-  const { state: { uiSettings, reports }, dispatch } =useContext(CommandsContext);
+  const { state: { uiSettings, reports }, dispatch } = useContext(CommandsContext);
 	const theme = useTheme();
 
 	// console.log(task);
@@ -156,8 +156,8 @@ function CommandList({ name, variant, list }) {
 	};
 
 	const populateList = () => {
-		return list.map((c) => (
-			<ListItem disablePadding key={getDisplayText(c)}>
+		return list.map((c, index) => (
+			<ListItem disablePadding key={index}>
 				<ListItemButton
 					sx={{ height: 16 }}
 					onContextMenu={(e) => e.preventDefault()}
@@ -179,10 +179,10 @@ function CommandList({ name, variant, list }) {
 	};
 
 	const getDisplayText = (c) =>
-		variant === CommandListType.Install ? c.name : c.displayText;
+		variant === CommandListType.Install ? c.Name : c.DisplayText;
 
 	const getTextColor = (c) => {
-		if (variant === CommandListType.Dos && c.type === CommandType.Code)
+		if (variant === CommandListType.Dos && c.Type === CommandType.Code)
 			return theme.typography.listItem.backgroundColorCodeCommand; // Green
 
 		return "black";

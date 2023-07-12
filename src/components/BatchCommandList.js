@@ -23,20 +23,20 @@ const BatchCommandList = ({ tasks }) => {
 	const theme = useTheme();
 
 	const handleChange = (e) => {
-		const task = tasks.find((t) => t.name === e.target.value);
+		const task = tasks.find((t) => t.Name === e.target.value);
 		if (task !== null) {
-			setSelectedTask(task.name);
-			setCommands(task.commands);
+			setSelectedTask(task.Name);
+			setCommands(task.Commands);
 		}
 	};
 
 	const populateTasks = () => {
 		return (
 			tasks &&
-			tasks.map((t) => (
+			tasks.map((t, index) => (
 				<MenuItem
-					value={t.name}
-					key={t.name}
+					value={t.Name}
+					key={index}
 					sx={{ m: 0, fontSize: `${theme.typography.listTitle.fontSize}` }}
 				>
 					{t.name}
@@ -46,8 +46,8 @@ const BatchCommandList = ({ tasks }) => {
 	};
 
 	const populateCommands = () => {
-		return commands.map((c) => (
-			<ListItem disablePadding key={c.displayText}>
+		return commands.map((c, index) => (
+			<ListItem disablePadding key={index}>
 				<ListItemButton
 					sx={{ height: 16 }}
 					onContextMenu={(e) => e.preventDefault()}
@@ -57,7 +57,7 @@ const BatchCommandList = ({ tasks }) => {
 						primaryTypographyProps={{
 							fontSize: `${theme.typography.listItem.fontSize}`,
 						}}
-						primary={c.displayText}
+						primary={c.DisplayText}
 					/>
 				</ListItemButton>
 			</ListItem>

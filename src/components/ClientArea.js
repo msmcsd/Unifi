@@ -57,14 +57,14 @@ const ClientArea = ({
 					// flexWrap="wrap"
 				>
 					{dosTasks.map(
-						(t) =>
-							t.commands &&
-							t.commands.length > 0 && (
+						(t, index) =>
+							t.Commands &&
+							t.Commands.length > 0 && (
 								<CommandList
-									key={t.name}
-									name={t.name}
+									key={index}
+									name={t.Name}
 									variant={CommandListType.Dos}
-									list={t.commands}
+									list={t.Commands}
 								/>
 							)
 					)}

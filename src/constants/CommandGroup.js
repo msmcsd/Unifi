@@ -1,13 +1,13 @@
 const CommandGroup =
 {
-    Install: 0,
-    Dos: 1,
-    Taskbar: 2,
-    Download: 3,
-    Rollback: 4,
-    Batch: 5,
-    Function: 6,
-    Variable: 7
+    Install: "Install",
+    Dos: "Dos",
+    Taskbar: "Taskbar",
+    Download: "Download",
+    Rollback: "Rollback",
+    Batch: "Batch",
+    Function: "Function",
+    Variable: "Variable"
 }
 
 export default CommandGroup;
