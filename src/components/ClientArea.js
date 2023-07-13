@@ -8,12 +8,14 @@ import BatchCommandList from "./BatchCommandList";
 import ReportList from "./ReportList";
 import InstallArea from "./InstallArea";
 import DownloadArea from "./DownloadArea";
+import DosCommandTabs from "./DosCommandTabs";
 
 const ClientArea = ({
 	dosTasks,
 	batchTasks,
 	variables,
 }) => {
+	
 	return (
 		<Grid // Main grid that covers the whole client area. There are 3 columnds.
 			container
@@ -54,18 +56,7 @@ const ClientArea = ({
 					direction="row"
 					// flexWrap="wrap"
 				>
-					{dosTasks.map(
-						(t, index) =>
-							t.Commands &&
-							t.Commands.length > 0 && (
-								<CommandList
-									key={index}
-									name={t.Name}
-									variant={CommandListType.Dos}
-									list={t.Commands}
-								/>
-							)
-					)}
+					<DosCommandTabs dosTasks={dosTasks}/>
 				</Grid>
 			</Grid>
 			<Grid
