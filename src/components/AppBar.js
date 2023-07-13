@@ -41,13 +41,15 @@ function AppBar() {
       // setInstallTasks(data.filter(t => t.commandGroup === CommandGroup.Install));
       // setDownloadTask(data.filter(t => t.commandGroup === CommandGroup.Download )[0]);
       // setDownloadTask(data.find(t => t.commandGroup === CommandGroup.Download ));
-      // setDrawerTasks(data.find(t => t.commandGroup === CommandGroup.Taskbar ));
+      // setDrawerTasks(data.find(t => t.CommandGroup === CommandGroup.Taskbar ));
       setBatchTasks(data.filter(t => t.CommandGroup === CommandGroup.Batch ));
       setVariables(data.find(t => t.CommandGroup === CommandGroup.Variable ).Commands);
     }
 
     fetchTasks();
-  }, [])
+	}, [])
+	
+	console.log("app bar drawer commands", drawerTask.Commands)
 
   return (
     <Box sx={{ display: 'flex' }}>

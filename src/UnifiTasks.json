@@ -1485,7 +1485,7 @@
 				"IconSourcePath": "${NotepadPath}",
 				"ShowOnMachine": "Test",
 				"Visible": false,
-				"TaskImage": "Cmd.mp"
+				"TaskImage": "Cmd.bmp"
 			},
 			{
 				"Command": "${NotepadPath}",
