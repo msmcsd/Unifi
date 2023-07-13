@@ -11,8 +11,6 @@ import DownloadArea from "./DownloadArea";
 
 const ClientArea = ({
 	dosTasks,
-	installTasks,
-	downloadTask,
 	batchTasks,
 	variables,
 }) => {
