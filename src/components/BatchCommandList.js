@@ -18,8 +18,9 @@ import BaseBox from "./BaseBox";
 import ListHeader from "./ListHeader";
 
 const BatchCommandList = ({ tasks }) => {
-	const [selectedTask, setSelectedTask] = useState(tasks[0].name);
-	const [commands, setCommands] = useState(tasks[0].commands);
+	console.log("tasks[0]?.Name", tasks[0].Name);
+	const [selectedTask, setSelectedTask] = useState('');
+	const [commands, setCommands] = useState(null);
 	const theme = useTheme();
 
 	const handleChange = (e) => {
@@ -37,16 +38,16 @@ const BatchCommandList = ({ tasks }) => {
 				<MenuItem
 					value={t.Name}
 					key={index}
-					sx={{ m: 0, fontSize: `${theme.typography.listTitle.fontSize}` }}
+					sx={{ m: 0, fontSize: `${theme.typography.fontSize}` }}
 				>
-					{t.name}
+					{t.Name}
 				</MenuItem>
 			))
 		);
 	};
 
 	const populateCommands = () => {
-		return commands.map((c, index) => (
+		return commands && commands.map((c, index) => (
 			<ListItem disablePadding key={index}>
 				<ListItemButton
 					sx={{ height: 16 }}
@@ -83,7 +84,7 @@ const BatchCommandList = ({ tasks }) => {
 							value={selectedTask}
 							// label="Age"
 							onChange={(e) => handleChange(e)}
-							sx={{ mt: 0, height: 36 }}
+							sx={{ mt: 0, height: 25 }}
 						>
 							{populateTasks()}
 						</Select>
